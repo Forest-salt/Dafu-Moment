@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+    <!-- DAFU MOMENT 品牌 Logo：墨线贴纸饭碗（与 src/components/brand-logo.vue 同源，改图标需同步两处） -->
+    <rect x="2" y="2" width="60" height="60" rx="14" fill="#FFFDF4" stroke="#3D2F1E" stroke-width="3.5"/>
+    <path d="M25.5 21.5 C23.5 18.5 26.5 16.5 25 13.5" fill="none" stroke="#3D2F1E" stroke-width="3" stroke-linecap="round"/>
+    <path d="M35.5 21.5 C33.5 18.5 36.5 16.5 35 13.5" fill="none" stroke="#3D2F1E" stroke-width="3" stroke-linecap="round"/>
+    <path d="M17 33 C16.5 27.5 20.5 24 24.5 25.2 C26 21 32 20 34.5 23 C38.5 20.5 44.5 22.5 45 27 C48 27.5 48 30.5 47.5 33 Z" fill="#FFFFFF" stroke="#3D2F1E" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M13 33 H51 C51 44.5 42.5 53 32 53 C21.5 53 13 44.5 13 33 Z" fill="#FF6633" stroke="#3D2F1E" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="25.5" y="52" width="13" height="4.5" rx="2.25" fill="#3D2F1E"/>
+</svg>
