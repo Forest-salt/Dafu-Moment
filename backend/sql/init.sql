@@ -13,7 +13,7 @@ USE dafu;
 
 -- 1. 用户表
 CREATE TABLE IF NOT EXISTS `user` (
-    `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
+    `id` BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '主键标识',
     `username` VARCHAR(32) NOT NULL UNIQUE COMMENT '登录名',
     `password` VARCHAR(72) NOT NULL COMMENT 'bcryptjs',
     `nickname` VARCHAR(32) NOT NULL COMMENT '展示名',
@@ -33,10 +33,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 -- 2. 点位表（校内食堂 + 永嘉天地 + 学生街 + 周边统一建模，type 区分）
 CREATE TABLE IF NOT EXISTS `canteen` (
-    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `id` INT PRIMARY KEY AUTO_INCREMENT COMMENT '主键标识',
     `name` VARCHAR(64) NOT NULL UNIQUE COMMENT '如「旗山校区·京元餐厅」',
     `type` TINYINT NOT NULL DEFAULT 0 COMMENT '0 校内食堂 / 1 永嘉天地 / 2 学生街 / 3 周边其他',
-    `campus` VARCHAR(32) NOT NULL DEFAULT '旗山校区',
+    `campus` VARCHAR(32) NOT NULL DEFAULT '旗山校区' COMMENT '所属校区',
     `location` VARCHAR(128) NOT NULL DEFAULT '' COMMENT '楼栋/方位描述',
     `avg_price` DECIMAL(6, 1) NULL COMMENT '人均消费（元）',
     `lat` DECIMAL(10, 6) NULL COMMENT '地图纬度（GCJ-02 火星坐标，后台拖拽校准）',
@@ -49,38 +49,38 @@ CREATE TABLE IF NOT EXISTS `canteen` (
 
 -- 3. 档口表（食堂档口 / 商铺默认档口）
 CREATE TABLE IF NOT EXISTS `station` (
-    `id` INT PRIMARY KEY AUTO_INCREMENT,
-    `canteen_id` INT NOT NULL,
+    `id` INT PRIMARY KEY AUTO_INCREMENT COMMENT '主键标识',
+    `canteen_id` INT NOT NULL COMMENT '所属点位ID（canteen.id）',
     `name` VARCHAR(64) NOT NULL COMMENT '如「三楼麻辣香锅」',
     `category` VARCHAR(32) NOT NULL DEFAULT '' COMMENT '品类（筛选用）',
     `cover_object_key` VARCHAR(255) NULL COMMENT '封面图 MinIO objectKey',
     `status` TINYINT NOT NULL DEFAULT 0 COMMENT '0 营业 / 1 休摊 / 2 下架',
     `manager_user_id` BIGINT NULL COMMENT '档口负责人',
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     KEY `idx_canteen` (`canteen_id`, `status`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 -- 4. 菜品表（评价第一公民）
 CREATE TABLE IF NOT EXISTS `dish` (
-    `id` INT PRIMARY KEY AUTO_INCREMENT,
-    `station_id` INT NOT NULL,
-    `name` VARCHAR(64) NOT NULL,
+    `id` INT PRIMARY KEY AUTO_INCREMENT COMMENT '主键标识',
+    `station_id` INT NOT NULL COMMENT '所属档口ID（station.id）',
+    `name` VARCHAR(64) NOT NULL COMMENT '名称',
     `price` DECIMAL(6, 1) NOT NULL DEFAULT 0 COMMENT '元',
     `taste_tags` VARCHAR(128) NOT NULL DEFAULT '' COMMENT '口味：偏辣,少油…',
     `taboo_tags` VARCHAR(128) NOT NULL DEFAULT '' COMMENT '忌口：清真,素食,无香菜,无葱蒜',
     `is_recommended` TINYINT(1) NOT NULL DEFAULT 0 COMMENT '推荐菜标记（管理员标记/聚合修正）',
-    `cover_object_key` VARCHAR(255) NULL,
+    `cover_object_key` VARCHAR(255) NULL COMMENT '封面图MinIO对象键',
     `status` TINYINT NOT NULL DEFAULT 0 COMMENT '0 在售 / 1 下架',
     `first_seen_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '上新时间（新品排序口径）',
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     KEY `idx_station` (`station_id`, `status`),
     KEY `idx_price` (`status`, `price`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 -- 5. 评分维度配置表（分项评分由配置驱动，前端按点位类型动态渲染）
 CREATE TABLE IF NOT EXISTS `review_dimension` (
-    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `id` INT PRIMARY KEY AUTO_INCREMENT COMMENT '主键标识',
     `dimension_key` VARCHAR(32) NOT NULL UNIQUE COMMENT '维度键，写入 review.dimension_scores',
     `dimension_name` VARCHAR(32) NOT NULL COMMENT '展示名，如「口味」',
     `applicable_types` JSON NOT NULL COMMENT '适用的点位类型数组，如 [0,1,2,3]',
@@ -90,10 +90,10 @@ CREATE TABLE IF NOT EXISTS `review_dimension` (
 
 -- 6. 评价表（多态评价，核心表；分项得分 JSON + 权重加权总分）
 CREATE TABLE IF NOT EXISTS `review` (
-    `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-    `user_id` BIGINT NOT NULL,
+    `id` BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '主键标识',
+    `user_id` BIGINT NOT NULL COMMENT '所属用户ID（user.id）',
     `subject_type` TINYINT NOT NULL COMMENT '0 菜品 / 1 档口 / 2 点位',
-    `subject_id` INT NOT NULL,
+    `subject_id` INT NOT NULL COMMENT '目标ID，由subject_type指定目标表',
     `overall_score` DECIMAL(2, 1) NOT NULL COMMENT '总分 = Σ(分项×权重)/Σ权重，1.0-5.0',
     `dimension_scores` JSON NOT NULL COMMENT '分项得分，如 {"taste":5,"portion":4}，键须过维度适用性校验',
     `content` VARCHAR(1000) NOT NULL DEFAULT '' COMMENT '文字',
@@ -104,8 +104,8 @@ CREATE TABLE IF NOT EXISTS `review` (
     `up_count` INT NOT NULL DEFAULT 0 COMMENT '有用投票（冗余计数）',
     `down_count` INT NOT NULL DEFAULT 0 COMMENT '没用投票（冗余计数）',
     `like_count` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '点赞数（review_like 冗余计数）',
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     UNIQUE KEY `uk_one_review` (`user_id`, `subject_type`, `subject_id`) COMMENT '一人一对象一条（防刷硬约束）',
     KEY `idx_list` (`subject_type`, `subject_id`, `status`, `created_at`),
     KEY `idx_user` (`user_id`, `created_at`)
@@ -113,8 +113,8 @@ CREATE TABLE IF NOT EXISTS `review` (
 
 -- 7. 评价图片表
 CREATE TABLE IF NOT EXISTS `review_image` (
-    `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-    `review_id` BIGINT NOT NULL,
+    `id` BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '主键标识',
+    `review_id` BIGINT NOT NULL COMMENT '所属评价ID（review.id）',
     `object_key` VARCHAR(255) NOT NULL COMMENT 'MinIO 路径',
     `status` TINYINT NOT NULL DEFAULT 0 COMMENT '0 正常 / 1 违规（连带评价下架）',
     KEY `idx_review` (`review_id`)
@@ -122,102 +122,102 @@ CREATE TABLE IF NOT EXISTS `review_image` (
 
 -- 8. 聚合表（读路径主力，多态；对已发布评价做普通平均，无加权无衰减）
 CREATE TABLE IF NOT EXISTS `review_summary` (
-    `subject_type` TINYINT NOT NULL,
-    `subject_id` INT NOT NULL,
+    `subject_type` TINYINT NOT NULL COMMENT '目标类型：0菜品、1档口、2点位',
+    `subject_id` INT NOT NULL COMMENT '目标ID，由subject_type指定目标表',
     `review_count` INT NOT NULL DEFAULT 0 COMMENT '已发布数',
     `sum_score` DECIMAL(10, 2) NOT NULL DEFAULT 0 COMMENT 'Σ overall_score',
     `rating_avg` DECIMAL(3, 2) NOT NULL DEFAULT 0 COMMENT '普通平均分',
     `dim_sums` JSON NULL COMMENT '分项求和 {"taste":48,…}，均分 = dim_sums/review_count',
-    `hist_1` INT NOT NULL DEFAULT 0,
-    `hist_2` INT NOT NULL DEFAULT 0,
-    `hist_3` INT NOT NULL DEFAULT 0,
-    `hist_4` INT NOT NULL DEFAULT 0,
-    `hist_5` INT NOT NULL DEFAULT 0,
+    `hist_1` INT NOT NULL DEFAULT 0 COMMENT '四舍五入后归入1星桶的已发布评价数',
+    `hist_2` INT NOT NULL DEFAULT 0 COMMENT '四舍五入后归入2星桶的已发布评价数',
+    `hist_3` INT NOT NULL DEFAULT 0 COMMENT '四舍五入后归入3星桶的已发布评价数',
+    `hist_4` INT NOT NULL DEFAULT 0 COMMENT '四舍五入后归入4星桶的已发布评价数',
+    `hist_5` INT NOT NULL DEFAULT 0 COMMENT '四舍五入后归入5星桶的已发布评价数',
     `recalc_at` DATETIME NULL COMMENT '最近重算时间（观测漂移）',
     PRIMARY KEY (`subject_type`, `subject_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 -- 9. 收藏表（仅「想吃」一种语义，一对象一条）
 CREATE TABLE IF NOT EXISTS `favorite` (
-    `user_id` BIGINT NOT NULL,
-    `subject_type` TINYINT NOT NULL,
-    `subject_id` INT NOT NULL,
+    `user_id` BIGINT NOT NULL COMMENT '所属用户ID（user.id）',
+    `subject_type` TINYINT NOT NULL COMMENT '目标类型：0菜品、1档口、2点位',
+    `subject_id` INT NOT NULL COMMENT '目标ID，由subject_type指定目标表',
     `list_type` TINYINT NOT NULL DEFAULT 0 COMMENT '0 想吃（唯一收藏语义，保留列位兼容）',
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (`user_id`, `subject_type`, `subject_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 -- 9.1 点赞表（v2.1 补齐：一人一赞，review.like_count 冗余计数的数据源）
 CREATE TABLE IF NOT EXISTS `review_like` (
-    `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
+    `id` BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '主键标识',
     `user_id` BIGINT NOT NULL COMMENT '点赞人',
     `review_id` BIGINT NOT NULL COMMENT '被赞评价',
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     UNIQUE KEY `uk_user_review` (`user_id`, `review_id`) COMMENT '一人一赞硬约束',
     KEY `idx_review` (`review_id`) COMMENT '按评价聚合点赞人与计数'
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 -- 10. 举报表
 CREATE TABLE IF NOT EXISTS `report` (
-    `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-    `reporter_id` BIGINT NOT NULL,
-    `subject_type` TINYINT NOT NULL,
+    `id` BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '主键标识',
+    `reporter_id` BIGINT NOT NULL COMMENT '举报人ID（user.id）',
+    `subject_type` TINYINT NOT NULL COMMENT '举报目标类型（既有接口允许0、1、2；目标映射按业务接口）',
     `subject_id` INT NOT NULL COMMENT '此处为 review.id',
     `reason` TINYINT NOT NULL COMMENT '1 垃圾广告 / 2 人身攻击 / 3 虚假信息 / 4 抄袭搬运 / 5 其他',
-    `detail` VARCHAR(300) NOT NULL DEFAULT '',
+    `detail` VARCHAR(300) NOT NULL DEFAULT '' COMMENT '举报补充说明',
     `status` VARCHAR(16) NOT NULL DEFAULT 'open' COMMENT 'open/resolved/rejected',
-    `handled_by` BIGINT NULL,
-    `handled_at` DATETIME NULL,
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `handled_by` BIGINT NULL COMMENT '处理管理员ID（user.id），未处理时为空',
+    `handled_at` DATETIME NULL COMMENT '处理时间，未处理时为空',
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     KEY `idx_status` (`status`, `created_at`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 -- 11. 档口动态公告表
 CREATE TABLE IF NOT EXISTS `station_post` (
-    `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-    `station_id` INT NOT NULL,
-    `author_id` BIGINT NOT NULL,
+    `id` BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '主键标识',
+    `station_id` INT NOT NULL COMMENT '所属档口ID（station.id）',
+    `author_id` BIGINT NOT NULL COMMENT '公告作者ID（user.id）',
     `type` VARCHAR(16) NOT NULL COMMENT 'new_dish/menu_change/away/promo',
-    `content` VARCHAR(200) NOT NULL,
-    `starts_at` DATETIME NULL,
-    `ends_at` DATETIME NULL,
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `content` VARCHAR(200) NOT NULL COMMENT '正文内容',
+    `starts_at` DATETIME NULL COMMENT '生效开始时间',
+    `ends_at` DATETIME NULL COMMENT '生效结束时间',
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     KEY `idx_station` (`station_id`, `created_at`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 -- 12. 敏感词表（DFA 词库源；1 替换后发布 / 2、3 转人工审核）
 CREATE TABLE IF NOT EXISTS `banned_word` (
-    `id` INT PRIMARY KEY AUTO_INCREMENT,
-    `word` VARCHAR(64) NOT NULL UNIQUE,
+    `id` INT PRIMARY KEY AUTO_INCREMENT COMMENT '主键标识',
+    `word` VARCHAR(64) NOT NULL UNIQUE COMMENT '敏感词文本',
     `level` TINYINT NOT NULL COMMENT '1 替换 / 2 进人工 / 3 进人工（严重）'
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 -- 13. 通知表（处置/申诉/举报结果）
 CREATE TABLE IF NOT EXISTS `notification` (
-    `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-    `user_id` BIGINT NOT NULL,
+    `id` BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '主键标识',
+    `user_id` BIGINT NOT NULL COMMENT '所属用户ID（user.id）',
     `type` VARCHAR(32) NOT NULL COMMENT 'audit/mute/ban/report/reply/appeal',
-    `title` VARCHAR(100) NOT NULL,
-    `content` VARCHAR(500) NOT NULL DEFAULT '',
-    `ref_type` VARCHAR(32) NULL,
-    `ref_id` BIGINT NULL,
-    `read_at` DATETIME NULL,
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `title` VARCHAR(100) NOT NULL COMMENT '通知标题',
+    `content` VARCHAR(500) NOT NULL DEFAULT '' COMMENT '正文内容',
+    `ref_type` VARCHAR(32) NULL COMMENT '关联业务类型',
+    `ref_id` BIGINT NULL COMMENT '关联业务记录ID，由ref_type指定含义',
+    `read_at` DATETIME NULL COMMENT '已读时间，未读时为空',
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     KEY `idx_user` (`user_id`, `created_at`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 -- 14. 档口负责人回应表（1:1）
 CREATE TABLE IF NOT EXISTS `review_reply` (
-    `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-    `review_id` BIGINT NOT NULL UNIQUE,
-    `user_id` BIGINT NOT NULL,
-    `content` VARCHAR(500) NOT NULL,
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    `id` BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '主键标识',
+    `review_id` BIGINT NOT NULL UNIQUE COMMENT '所属评价ID（review.id）',
+    `user_id` BIGINT NOT NULL COMMENT '所属用户ID（user.id）',
+    `content` VARCHAR(500) NOT NULL COMMENT '正文内容',
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 -- 15. 点位提交审核表（用户提交新点位/档口/菜品，管理员审核后写入主表）
 CREATE TABLE IF NOT EXISTS `point_submit` (
-    `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
+    `id` BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '主键标识',
     `submitter_id` BIGINT NOT NULL COMMENT '提交人',
     `submit_type` TINYINT NOT NULL COMMENT '0 点位 / 1 档口 / 2 菜品',
     `target_id` INT NULL COMMENT '挂靠对象（提交档口时为点位 ID，提交菜品时为档口 ID）',
@@ -225,25 +225,25 @@ CREATE TABLE IF NOT EXISTS `point_submit` (
     `audit_status` TINYINT NOT NULL DEFAULT 0 COMMENT '0 待审 / 1 通过 / 2 驳回',
     `auditor_id` BIGINT NULL COMMENT '审核管理员',
     `audit_comment` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '审核意见',
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     KEY `idx_status` (`audit_status`, `created_at`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 -- 16. AI 会话表（AI 助手问答留痕，仅复盘用不参与核心链路）
 CREATE TABLE IF NOT EXISTS `ai_conversation` (
-    `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
-    `user_id` BIGINT NOT NULL,
+    `id` BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '主键标识',
+    `user_id` BIGINT NOT NULL COMMENT '所属用户ID（user.id）',
     `question` VARCHAR(500) NOT NULL COMMENT '自然语言提问',
     `parsed_conditions` JSON NULL COMMENT '解析出的条件（口味/价格/忌口）',
     `recommend_ids` JSON NULL COMMENT '命中平台对象 [{subjectType,subjectId,name}]',
     `answer` TEXT NULL COMMENT '模型返回的建议文本',
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     KEY `idx_user` (`user_id`, `created_at`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 -- AI 供应商注册表（r45：后台可维护；默认 7 项由后端启动幂等种子写入，此处只建表）
 CREATE TABLE IF NOT EXISTS `ai_provider` (
-    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `id` INT PRIMARY KEY AUTO_INCREMENT COMMENT '主键标识',
     `provider_key` VARCHAR(32) NOT NULL COMMENT '供应商标识（存 user.ai_config.provider）',
     `name` VARCHAR(64) NOT NULL COMMENT '显示名',
     `protocol` VARCHAR(16) NOT NULL DEFAULT 'openai' COMMENT '协议：openai 兼容 / anthropic 原生',
@@ -259,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `ai_provider` (
 -- api_key_cipher 为 AES-256-GCM 密文（utils/secret-box），库内无明文密钥
 -- platform_id 非空 = 选用平台托管模型的个人引用行（名称/模型 ID 存快照，真实密钥留在 ai_platform_model）
 CREATE TABLE IF NOT EXISTS `ai_model` (
-    `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
+    `id` BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '主键标识',
     `user_id` BIGINT NOT NULL COMMENT '归属用户',
     `platform_id` BIGINT NULL COMMENT '平台托管模型引用（ai_platform_model.id，非空=引用行）',
     `provider_key` VARCHAR(32) NOT NULL COMMENT '供应商标识（ai_provider.provider_key，引用行固定 platform）',
@@ -269,14 +269,14 @@ CREATE TABLE IF NOT EXISTS `ai_model` (
     `display_name` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '模型展示名称（空=显示模型 ID）',
     `api_key_cipher` TEXT NOT NULL COMMENT 'API 密钥密文（AES-256-GCM，iv+tag+ciphertext base64）',
     `is_selected` TINYINT(1) NOT NULL DEFAULT 0 COMMENT '使用中（单用户仅一条为 1）',
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     KEY `idx_user` (`user_id`),
     KEY `idx_platform` (`platform_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COMMENT '用户 AI 模型配置列表（密钥加密存储）';
 
 -- 19. 平台托管 AI 模型（r52 起：后台配置含密钥，前台用户免配置直接选用；密钥永不下发前端）
 CREATE TABLE IF NOT EXISTS `ai_platform_model` (
-    `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
+    `id` BIGINT PRIMARY KEY AUTO_INCREMENT COMMENT '主键标识',
     `name` VARCHAR(64) NOT NULL COMMENT '展示名称',
     `protocol` VARCHAR(16) NOT NULL DEFAULT 'openai' COMMENT '协议：openai 兼容 / anthropic 原生',
     `base_url` VARCHAR(200) NOT NULL COMMENT '接口地址',
@@ -284,24 +284,24 @@ CREATE TABLE IF NOT EXISTS `ai_platform_model` (
     `api_key_cipher` TEXT NOT NULL COMMENT 'API 密钥密文（AES-256-GCM，iv+tag+ciphertext base64）',
     `enabled` TINYINT(1) NOT NULL DEFAULT 1 COMMENT '是否启用（停用后用户端即刻隐藏/失效回落）',
     `sort_order` INT NOT NULL DEFAULT 0 COMMENT '排序（小在前）',
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间'
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COMMENT '平台托管 AI 模型（后台配置，用户直接选用）';
 
 -- 20. 个人贴图库（r52 手账贴纸）：商家菜品图自动抠图 / 用户上传抠图，MinIO 存透明 PNG
 CREATE TABLE IF NOT EXISTS `sticker` (
-    `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
-    `user_id` BIGINT NOT NULL,
+    `id` BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '主键标识',
+    `user_id` BIGINT NOT NULL COMMENT '所属用户ID（user.id）',
     `name` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '贴纸名（默认菜品/文件名）',
     `object_key` VARCHAR(255) NOT NULL COMMENT 'MinIO 对象键（透明 PNG）',
     `source` TINYINT NOT NULL DEFAULT 0 COMMENT '0 用户上传抠图 / 1 收藏自动抠图',
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     KEY `idx_user` (`user_id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COMMENT '个人贴图库（手账贴纸素材）';
 
 -- 21. 美食手账（r52 手账编辑器）：bg 背景样式 + layout 块 JSON（贴纸/文字块，含位置缩放旋转）
 CREATE TABLE IF NOT EXISTS `journal` (
-    `id` BIGINT AUTO_INCREMENT PRIMARY KEY,
-    `user_id` BIGINT NOT NULL,
+    `id` BIGINT AUTO_INCREMENT PRIMARY KEY COMMENT '主键标识',
+    `user_id` BIGINT NOT NULL COMMENT '所属用户ID（user.id）',
     `title` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '手账标题',
     `date` DATE NOT NULL COMMENT '手账对应日期',
     `text` TEXT NULL COMMENT '正文随笔',
@@ -309,7 +309,7 @@ CREATE TABLE IF NOT EXISTS `journal` (
     `bg_src` VARCHAR(255) NULL COMMENT 'bg=3 自定义背景图 /img/ 路径',
     `layout` JSON NOT NULL COMMENT '画布块数组 [{kind,sticker,x,y,w,rot,text,color,size}]（画布 750x1000）',
     `cover` VARCHAR(255) NULL COMMENT '封面贴纸对象键（列表缩略）',
-    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     KEY `idx_user_date` (`user_id`, `date`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COMMENT '美食手账（贴纸排版画布）';
 
