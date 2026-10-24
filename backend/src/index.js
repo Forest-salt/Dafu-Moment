@@ -12,6 +12,12 @@ const { of } = require('./utils/logger');
 
 const log = of('[boot]');
 
+// Legacy entry must never add old columns into an authoritative3.0 database.
+async function reject_db3_in_legacy() {
+    const rows=await query("SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME IN ('location','rating_detail','check_in')");
+    if(rows.length)throw new Error('检测到数据库3.0：旧版启动入口已停止，禁止运行旧seed或自动ALTER。请使用 npm run start:db3；前端及完整功能切换见docs/db3。');
+}
+
 /**
  * 等待 MySQL 就绪（重试 30 次 × 2s）
  */
@@ -294,6 +300,7 @@ async function ensure_ai_models() {
 async function main() {
     log.info('[boot] 大福食刻 后端启动中...');
     await wait_db();
+    await reject_db3_in_legacy();
     await ensure_schema();
     await ensure_position_columns();
     await ensure_upgrade_columns();

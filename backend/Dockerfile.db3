@@ -1,0 +1,10 @@
+# 从仓库根目录构建：docker build -f backend/Dockerfile.db3 -t dafu-backend-db3 .
+FROM node:20-alpine
+WORKDIR /app/backend
+COPY backend/package.json backend/package-lock.json ./
+RUN npm ci --ignore-scripts --omit=dev
+COPY backend/src ./src
+COPY data/db3/sql /app/data/db3/sql
+ENV TZ=Asia/Shanghai
+EXPOSE 3000
+CMD ["node", "src/index3.js"]
