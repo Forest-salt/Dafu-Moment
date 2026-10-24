@@ -1,0 +1,48 @@
+﻿表,SQL行,定义,本次处置
+user,16,`id` BIGINT PRIMARY KEY AUTO_INCREMENT,保留；已验证迁移前后索引元数据不变
+user,17,`username` VARCHAR(32) NOT NULL UNIQUE COMMENT '登录名',保留；已验证迁移前后索引元数据不变
+user,23,`fzu_uid` VARCHAR(16) NULL UNIQUE COMMENT '福大统一身份认证学号/工号（绑定后唯一，SSO 登录凭据）',保留；已验证迁移前后索引元数据不变
+canteen,36,`id` INT PRIMARY KEY AUTO_INCREMENT,保留；已验证迁移前后索引元数据不变
+canteen,37,`name` VARCHAR(64) NOT NULL UNIQUE COMMENT '如「旗山校区·京元餐厅」',保留；已验证迁移前后索引元数据不变
+station,52,`id` INT PRIMARY KEY AUTO_INCREMENT,保留；已验证迁移前后索引元数据不变
+station,60,"KEY `idx_canteen` (`canteen_id`, `status`)",保留；已验证迁移前后索引元数据不变
+dish,65,`id` INT PRIMARY KEY AUTO_INCREMENT,保留；已验证迁移前后索引元数据不变
+dish,77,"KEY `idx_station` (`station_id`, `status`)",保留；已验证迁移前后索引元数据不变
+dish,78,"KEY `idx_price` (`status`, `price`)",保留；已验证迁移前后索引元数据不变
+review_dimension,83,`id` INT PRIMARY KEY AUTO_INCREMENT,保留；已验证迁移前后索引元数据不变
+review_dimension,84,`dimension_key` VARCHAR(32) NOT NULL UNIQUE COMMENT '维度键，写入 review.dimension_scores',保留；已验证迁移前后索引元数据不变
+review,93,`id` BIGINT PRIMARY KEY AUTO_INCREMENT,保留；已验证迁移前后索引元数据不变
+review,109,"UNIQUE KEY `uk_one_review` (`user_id`, `subject_type`, `subject_id`) COMMENT '一人一对象一条（防刷硬约束）'",保留；已验证迁移前后索引元数据不变
+review,110,"KEY `idx_list` (`subject_type`, `subject_id`, `status`, `created_at`)",保留；已验证迁移前后索引元数据不变
+review,111,"KEY `idx_user` (`user_id`, `created_at`)",保留；已验证迁移前后索引元数据不变
+review_image,116,`id` BIGINT PRIMARY KEY AUTO_INCREMENT,保留；已验证迁移前后索引元数据不变
+review_image,120,KEY `idx_review` (`review_id`),保留；已验证迁移前后索引元数据不变
+review_summary,137,"PRIMARY KEY (`subject_type`, `subject_id`)",保留；已验证迁移前后索引元数据不变
+favorite,147,"PRIMARY KEY (`user_id`, `subject_type`, `subject_id`)",保留；已验证迁移前后索引元数据不变
+review_like,152,`id` BIGINT PRIMARY KEY AUTO_INCREMENT,保留；已验证迁移前后索引元数据不变
+review_like,156,"UNIQUE KEY `uk_user_review` (`user_id`, `review_id`) COMMENT '一人一赞硬约束'",保留；已验证迁移前后索引元数据不变
+review_like,157,KEY `idx_review` (`review_id`) COMMENT '按评价聚合点赞人与计数',保留；已验证迁移前后索引元数据不变
+report,162,`id` BIGINT PRIMARY KEY AUTO_INCREMENT,保留；已验证迁移前后索引元数据不变
+report,172,"KEY `idx_status` (`status`, `created_at`)",保留；已验证迁移前后索引元数据不变
+station_post,177,`id` BIGINT PRIMARY KEY AUTO_INCREMENT,保留；已验证迁移前后索引元数据不变
+station_post,185,"KEY `idx_station` (`station_id`, `created_at`)",保留；已验证迁移前后索引元数据不变
+banned_word,190,`id` INT PRIMARY KEY AUTO_INCREMENT,保留；已验证迁移前后索引元数据不变
+banned_word,191,`word` VARCHAR(64) NOT NULL UNIQUE,保留；已验证迁移前后索引元数据不变
+notification,197,`id` BIGINT PRIMARY KEY AUTO_INCREMENT,保留；已验证迁移前后索引元数据不变
+notification,206,"KEY `idx_user` (`user_id`, `created_at`)",保留；已验证迁移前后索引元数据不变
+review_reply,211,`id` BIGINT PRIMARY KEY AUTO_INCREMENT,保留；已验证迁移前后索引元数据不变
+review_reply,212,`review_id` BIGINT NOT NULL UNIQUE,保留；已验证迁移前后索引元数据不变
+point_submit,220,`id` BIGINT PRIMARY KEY AUTO_INCREMENT,保留；已验证迁移前后索引元数据不变
+point_submit,229,"KEY `idx_status` (`audit_status`, `created_at`)",保留；已验证迁移前后索引元数据不变
+ai_conversation,234,`id` BIGINT PRIMARY KEY AUTO_INCREMENT,保留；已验证迁移前后索引元数据不变
+ai_conversation,241,"KEY `idx_user` (`user_id`, `created_at`)",保留；已验证迁移前后索引元数据不变
+ai_provider,246,`id` INT PRIMARY KEY AUTO_INCREMENT,保留；已验证迁移前后索引元数据不变
+ai_provider,255,UNIQUE KEY `uk_provider_key` (`provider_key`),保留；已验证迁移前后索引元数据不变
+ai_model,262,`id` BIGINT PRIMARY KEY AUTO_INCREMENT,保留；已验证迁移前后索引元数据不变
+ai_model,273,KEY `idx_user` (`user_id`),保留；已验证迁移前后索引元数据不变
+ai_model,274,KEY `idx_platform` (`platform_id`),保留；已验证迁移前后索引元数据不变
+ai_platform_model,279,`id` BIGINT PRIMARY KEY AUTO_INCREMENT,保留；已验证迁移前后索引元数据不变
+sticker,292,`id` BIGINT AUTO_INCREMENT PRIMARY KEY,保留；已验证迁移前后索引元数据不变
+sticker,298,KEY `idx_user` (`user_id`),保留；已验证迁移前后索引元数据不变
+journal,303,`id` BIGINT AUTO_INCREMENT PRIMARY KEY,保留；已验证迁移前后索引元数据不变
+journal,313,"KEY `idx_user_date` (`user_id`, `date`)",保留；已验证迁移前后索引元数据不变
