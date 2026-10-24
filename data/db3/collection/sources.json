@@ -22,5 +22,17 @@
     "status": 200,
     "bytes": 798038,
     "sha256": "243d29b16f803ab55032de4fbcf34924eeaeec70a24a1ebd68f1bfe2eb549172"
+  },
+  {
+    "key": "ffm_qishan",
+    "url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "commit": "9d9680b6a4050fff132eb551c79f7818c8e9e928",
+    "license": "MIT",
+    "sha256": "99f0d368e9a518b4b95a14f38e0f8029bb685ce90a372d92bfdb00cee98e9cc7",
+    "records": 53,
+    "deduplicated_into_existing": 8,
+    "new_places": 45,
+    "prices_mean": "人均消费，不是菜品单价",
+    "coordinates_scope": "餐厅/门店参考位置，地图已暂缓"
   }
 ]

@@ -23,3 +23,8 @@ client/
 Thumbs.db
 .idea/
 .vscode/
+
+# 采集留档的公开网页/地图前端，仅保留本地；提交结构化事实、来源与许可。
+data/db3/collection/round2/*.html
+data/db3/collection/round2/*.html.txt
+data/db3/collection/round2/fzu-map-*.js

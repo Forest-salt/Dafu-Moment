@@ -2,7 +2,7 @@
   "zip_sha256": "5b297d13a729661084ee3690aed301b8133e85449ac572dc3f6c8a8bb498e0b9",
   "create_table_count": 78,
   "foreign_key_count": 106,
-  "collected_places": 15,
+  "collected_places": 60,
   "source_files": [
     {
       "name": "00_init.sql",
@@ -58,5 +58,9 @@
     }
   ],
   "target_database": "dafu_shike",
-  "existing_22_table_app_upgrade": false
+  "existing_22_table_app_upgrade": false,
+  "first_batch_places": 15,
+  "second_batch_features": 53,
+  "merged_aliases": 8,
+  "map_work_deferred": true
 }

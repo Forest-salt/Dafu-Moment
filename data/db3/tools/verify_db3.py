@@ -91,6 +91,26 @@ def main():
         except RuntimeError as e: assert '1452' in str(e)
         else: raise AssertionError('Foreign key did not reject orphan')
         passed('orphan_check_in_rejected','Nonexistent user rejected with 1452')
+        menu=json.loads((PACKAGE/'collection/estimated-menu.json').read_text(encoding='utf-8'))
+        # One intentionally prepriced test fixture must survive the estimated import unchanged.
+        query(args,"INSERT INTO station(name,location_id) SELECT '重庆小面',id FROM location WHERE name='重庆小面' AND deleted_at IS NULL;")
+        query(args,"INSERT INTO dish(station_id,name,price,price_unit,status) SELECT id,'重庆小面',21.75,'份',1 FROM station WHERE name='重庆小面';")
+        run(PACKAGE/'sql/06_estimated_menu_seed.sql')
+        assert scalar('SELECT COUNT(*) FROM dish;')==len(menu)
+        assert scalar('SELECT COUNT(*) FROM station;')==11
+        assert query(args,"SELECT price,price_unit,status FROM dish WHERE name='重庆小面';").strip()=='21.75\t份\t1'
+        assert scalar("SELECT COUNT(*) FROM dish WHERE price_unit='份（估算演示价）' AND status=0;")==len(menu)-1
+        for row in menu:
+            if row['dish_name']=='重庆小面' and row['source_id']=='qishan-018':continue
+            # Source values are internal generated fixtures; quote as SQL literals, never command text.
+            lit=lambda s:"'"+s.replace("'","''")+"'"
+            actual=query(args,'SELECT d.price FROM dish d JOIN station s ON s.id=d.station_id WHERE s.name='+lit(row['station_name'])+' AND d.name='+lit(row['dish_name'])+';').strip()
+            assert float(actual)==float(row['price']),(row['dish_name'],actual)
+        passed('estimated_menu_counts_and_existing_price_preserved',{'menu_rows':len(menu),'new_estimates_inserted':len(menu)-1,'prepriced_fixture':'21.75 / 份 / status1 unchanged','historical_2021_used':False})
+        first=checksums()
+        run(PACKAGE/'sql/06_estimated_menu_seed.sql')
+        assert checksums()==first
+        passed('estimated_menu_second_import_unchanged','No duplicated stations/dishes; all existing prices, units and statuses unchanged')
         run(PACKAGE/'source-ddl/seed_demo.sql')
         run(PACKAGE/'source-ddl/seed_demo.sql')
         raw=run(Path(a.original_checks))

@@ -4,7 +4,7 @@
   "schema_tables": 78,
   "schema_foreign_keys": 106,
   "schema_columns": 545,
-  "source_places": 15,
+  "source_places": 60,
   "synthetic": {
     "check_ins": 30,
     "days": 7,
@@ -28,7 +28,7 @@
     {
       "check": "public_places_import_twice",
       "passed": true,
-      "detail": "15 source-backed name/address rows, no duplicates"
+      "detail": "60 source-backed name/address rows, no duplicates"
     },
     {
       "check": "synthetic_seed_counts_and_repeat",
@@ -54,6 +54,21 @@
       "detail": "Nonexistent user rejected with 1452"
     },
     {
+      "check": "estimated_menu_counts_and_existing_price_preserved",
+      "passed": true,
+      "detail": {
+        "menu_rows": 37,
+        "new_estimates_inserted": 36,
+        "prepriced_fixture": "21.75 / 份 / status1 unchanged",
+        "historical_2021_used": false
+      }
+    },
+    {
+      "check": "estimated_menu_second_import_unchanged",
+      "passed": true,
+      "detail": "No duplicated stations/dishes; all existing prices, units and statuses unchanged"
+    },
+    {
       "check": "original_demo_twice_and_original_checks",
       "passed": true,
       "detail": "Original checking queries report no anomaly rows; table-count comment 74 is stale"
@@ -63,5 +78,6 @@
       "passed": true,
       "detail": "Injected forbidden dine-in packaging dimension is reported; data quality checks are not empty-pass"
     }
-  ]
+  ],
+  "verified_on": "2026-10-25"
 }

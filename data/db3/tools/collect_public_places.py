@@ -6,6 +6,8 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
+if (ROOT/'collection/round2/summary.json').exists():
+    raise SystemExit('第二批60条数据已生成；请改用tools/collect_round2.py，避免旧版15条采集器覆盖新数据。')
 OUT = ROOT / 'collection'
 OUT.mkdir(parents=True, exist_ok=True)
 SOURCES = [
