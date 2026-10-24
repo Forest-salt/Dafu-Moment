@@ -1,0 +1,16 @@
+﻿record_id,name,address,scene_category,source_key,source_url,source_published_date,collected_at,business_status_verified,delivery_to_fzu_verified,coordinates_verified,note
+fzu-001,玫瑰园食惠餐厅,,食堂,fzu_canteens_2025,https://hqc.fzu.edu.cn/info/1032/3114.htm,2025-06-30,2026-10-24T21:53:17.763366+08:00,False,False,False,官方历史资料确认名称；当前营业状态、价格和坐标未核验
+fzu-002,丁香园品膳餐厅,,食堂,fzu_canteens_2025,https://hqc.fzu.edu.cn/info/1032/3114.htm,2025-06-30,2026-10-24T21:53:17.763366+08:00,False,False,False,官方历史资料确认名称；当前营业状态、价格和坐标未核验
+fzu-003,桃李园餐厅,,食堂,fzu_canteens_2025,https://hqc.fzu.edu.cn/info/1032/3114.htm,2025-06-30,2026-10-24T21:53:17.763366+08:00,False,False,False,官方历史资料确认名称；当前营业状态、价格和坐标未核验
+fzu-004,佳客来西餐厅,,食堂,fzu_canteens_2025,https://hqc.fzu.edu.cn/info/1032/3114.htm,2025-06-30,2026-10-24T21:53:17.763366+08:00,False,False,False,官方历史资料确认名称；当前营业状态、价格和坐标未核验
+fzu-005,海棠园京元餐厅,,食堂,fzu_canteens_2025,https://hqc.fzu.edu.cn/info/1032/3114.htm,2025-06-30,2026-10-24T21:53:17.763366+08:00,False,False,False,官方历史资料确认名称；当前营业状态、价格和坐标未核验
+fzu-006,丹桂园朝阳餐厅,,食堂,fzu_canteens_2025,https://hqc.fzu.edu.cn/info/1032/3114.htm,2025-06-30,2026-10-24T21:53:17.763366+08:00,False,False,False,官方历史资料确认名称；当前营业状态、价格和坐标未核验
+fzu-007,茉莉园聚誉餐厅,,食堂,fzu_canteens_2025,https://hqc.fzu.edu.cn/info/1032/3114.htm,2025-06-30,2026-10-24T21:53:17.763366+08:00,False,False,False,官方历史资料确认名称；当前营业状态、价格和坐标未核验
+fzu-008,百合园立品餐厅,,食堂,fzu_canteens_2025,https://hqc.fzu.edu.cn/info/1032/3114.htm,2025-06-30,2026-10-24T21:53:17.763366+08:00,False,False,False,官方历史资料确认名称；当前营业状态、价格和坐标未核验
+fzu-009,紫竹园到口餐厅,,食堂,fzu_canteens_2025,https://hqc.fzu.edu.cn/info/1032/3114.htm,2025-06-30,2026-10-24T21:53:17.763366+08:00,False,False,False,官方历史资料确认名称；当前营业状态、价格和坐标未核验
+fzu-010,紫荆园捷祥餐厅,,食堂,fzu_canteens_2025,https://hqc.fzu.edu.cn/info/1032/3114.htm,2025-06-30,2026-10-24T21:53:17.763366+08:00,False,False,False,官方历史资料确认名称；当前营业状态、价格和坐标未核验
+fzu-011,牡丹园清谷餐厅,,食堂,fzu_canteens_2025,https://hqc.fzu.edu.cn/info/1032/3114.htm,2025-06-30,2026-10-24T21:53:17.763366+08:00,False,False,False,官方历史资料确认名称；当前营业状态、价格和坐标未核验
+fzu-012,芙蓉园兴安餐厅,,食堂,fzu_canteens_2025,https://hqc.fzu.edu.cn/info/1032/3114.htm,2025-06-30,2026-10-24T21:53:17.763366+08:00,False,False,False,官方历史资料确认名称；当前营业状态、价格和坐标未核验
+mcd-013,福州麦当劳国宾大道DT餐厅,福建省福州市闽侯县上街镇国宾大道233号博仕家园B区的2-2#的101-104商业、129-132复式商业的商铺,其他,mcd_official_stores,https://www.mcdonalds.com.cn/page/giftcard-available-stores,,2026-10-24T21:53:17.763366+08:00,False,False,False,品牌官方名录确认名称和地址；周边候选，未核验到校配送和距离
+mcd-014,福州麦当劳上街镇国宾大道餐厅,福建省福州市闽侯县上街镇国宾大道268号永辉城市生活广场16#楼,其他,mcd_official_stores,https://www.mcdonalds.com.cn/page/giftcard-available-stores,,2026-10-24T21:53:17.763366+08:00,False,False,False,品牌官方名录确认名称和地址；周边候选，未核验到校配送和距离
+mcd-015,福州麦当劳闽侯上街国宾大道(梅园酒店)餐厅,福建省福州市闽侯县上街镇国宾大道350号梅园上街广场1-1#楼一层1号商铺,其他,mcd_official_stores,https://www.mcdonalds.com.cn/page/giftcard-available-stores,,2026-10-24T21:53:17.763366+08:00,False,False,False,品牌官方名录确认名称和地址；周边候选，未核验到校配送和距离

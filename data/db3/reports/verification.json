@@ -1,0 +1,67 @@
+{
+  "mysql_version": "8.0.46",
+  "production_accessed": false,
+  "schema_tables": 78,
+  "schema_foreign_keys": 106,
+  "schema_columns": 545,
+  "source_places": 15,
+  "synthetic": {
+    "check_ins": 30,
+    "days": 7,
+    "achievement_progress": 12,
+    "achievement_definitions": 4,
+    "pets": 3,
+    "profiles": 3,
+    "pending_tasks": 5
+  },
+  "results": [
+    {
+      "check": "db3_schema_78_tables_106_foreign_keys",
+      "passed": true,
+      "detail": "545 columns; actual MySQL 8.0.46 build"
+    },
+    {
+      "check": "schema_and_dictionary_repeat_preserve_rows",
+      "passed": true,
+      "detail": "Second run has no table deletion or dictionary row change"
+    },
+    {
+      "check": "public_places_import_twice",
+      "passed": true,
+      "detail": "15 source-backed name/address rows, no duplicates"
+    },
+    {
+      "check": "synthetic_seed_counts_and_repeat",
+      "passed": true,
+      "detail": {
+        "check_ins": 30,
+        "days": 7,
+        "achievement_progress": 12,
+        "achievement_definitions": 4,
+        "pets": 3,
+        "profiles": 3,
+        "pending_tasks": 5
+      }
+    },
+    {
+      "check": "duplicate_check_in_rejected",
+      "passed": true,
+      "detail": "Same user/location/day insert rejected with 1062"
+    },
+    {
+      "check": "orphan_check_in_rejected",
+      "passed": true,
+      "detail": "Nonexistent user rejected with 1452"
+    },
+    {
+      "check": "original_demo_twice_and_original_checks",
+      "passed": true,
+      "detail": "Original checking queries report no anomaly rows; table-count comment 74 is stale"
+    },
+    {
+      "check": "original_checks_detect_injected_invalid_dimension",
+      "passed": true,
+      "detail": "Injected forbidden dine-in packaging dimension is reported; data quality checks are not empty-pass"
+    }
+  ]
+}
