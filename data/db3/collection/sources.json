@@ -1,0 +1,38 @@
+[
+  {
+    "key": "fzu_canteens_2025",
+    "url": "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+    "fetched_at": "2026-10-24T21:53:17.763366+08:00",
+    "status": 200,
+    "bytes": 23731,
+    "sha256": "7805b6509a2ae9e4740f5100f5b538a8796702dd276abea164bb37e6c13c7517"
+  },
+  {
+    "key": "fzu_taoliyuan_2026",
+    "url": "https://hqc.fzu.edu.cn/info/1032/3376.htm",
+    "fetched_at": "2026-10-24T21:53:17.763366+08:00",
+    "status": 200,
+    "bytes": 22268,
+    "sha256": "4f122010fe5004ed00b80dac70c73abc1452c1f6772d565dcb665d6c69d7bbe6"
+  },
+  {
+    "key": "mcd_official_stores",
+    "url": "https://www.mcdonalds.com.cn/page/giftcard-available-stores",
+    "fetched_at": "2026-10-24T21:53:17.763366+08:00",
+    "status": 200,
+    "bytes": 798038,
+    "sha256": "243d29b16f803ab55032de4fbcf34924eeaeec70a24a1ebd68f1bfe2eb549172"
+  },
+  {
+    "key": "ffm_qishan",
+    "url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "commit": "9d9680b6a4050fff132eb551c79f7818c8e9e928",
+    "license": "MIT",
+    "sha256": "99f0d368e9a518b4b95a14f38e0f8029bb685ce90a372d92bfdb00cee98e9cc7",
+    "records": 53,
+    "deduplicated_into_existing": 8,
+    "new_places": 45,
+    "prices_mean": "人均消费，不是菜品单价",
+    "coordinates_scope": "餐厅/门店参考位置，地图已暂缓"
+  }
+]

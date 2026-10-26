@@ -1,0 +1,66 @@
+{
+  "zip_sha256": "5b297d13a729661084ee3690aed301b8133e85449ac572dc3f6c8a8bb498e0b9",
+  "create_table_count": 78,
+  "foreign_key_count": 106,
+  "collected_places": 60,
+  "source_files": [
+    {
+      "name": "00_init.sql",
+      "sha256": "21d57a80c17d69e1817680acae806c1e8b7838cda952fbb8f76dd138dfc0436b"
+    },
+    {
+      "name": "01_user.sql",
+      "sha256": "0690838b0116ae22fc36518ac845381111a268858f304c16e6c2318f6fcfd559"
+    },
+    {
+      "name": "02_catering.sql",
+      "sha256": "08b254bc5d30d67cb008bb8ac0ffe6cacdb0a87dd824527ead8757197a656064"
+    },
+    {
+      "name": "03_review.sql",
+      "sha256": "ceb4511529d2bc8cd41d1e5670218f4f549e8ece35df28293f52676358333a6c"
+    },
+    {
+      "name": "04_checkin.sql",
+      "sha256": "f24635c03e7c08721e126c4dd470e2dd9a32a740e1f6e1bc59d56c6f93cfb499"
+    },
+    {
+      "name": "05_community.sql",
+      "sha256": "779810aad69d169104b3c5be10495c52c1a0853a15b35f14204511523eb8b9d3"
+    },
+    {
+      "name": "06_ai.sql",
+      "sha256": "ac9b04b0a70e732a96385cfedd6909ae6f913af3c1adc0e488c190d4111a2a04"
+    },
+    {
+      "name": "07_fk.sql",
+      "sha256": "5a8a1bbb85ea8d257a237e67a7d25a0256b6680ca70f5a81bfd8d4206acca62d"
+    },
+    {
+      "name": "99_seed.sql",
+      "sha256": "961b2cc57a9b9dea1e5eebf4ca35be7558e7bfffdb9d6195140385881d2db66c"
+    },
+    {
+      "name": "seed_demo.sql",
+      "sha256": "1e7a43dfbffe9d5386d72208453be57d0b4b72fdd1b160463ba1c873ab0e9414"
+    },
+    {
+      "name": "校验SQL.sql",
+      "sha256": "0ad490c1ac10ba3a864f2842d1dd7e9e41d131b3d72a219bd019d7e5841661b2"
+    },
+    {
+      "name": "校验样例_五场景.sql",
+      "sha256": "9c9eb6e4f3083216201ccffe9117e38087c3e90104462eb65705db057dc07b82"
+    },
+    {
+      "name": "对账_定时任务建议.sql",
+      "sha256": "b2691df7efa7c3dd842a62dd97155c785ea7936c267b3a829b77be3064d12fb5"
+    }
+  ],
+  "target_database": "dafu_shike",
+  "existing_22_table_app_upgrade": false,
+  "first_batch_places": 15,
+  "second_batch_features": 53,
+  "merged_aliases": 8,
+  "map_work_deferred": true
+}

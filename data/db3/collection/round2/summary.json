@@ -1,0 +1,14 @@
+{
+  "public_places": 60,
+  "merged_aliases": 8,
+  "reference_coordinates": 53,
+  "historical_food_entries": 0,
+  "historical_station_names": 0,
+  "historical_2021_excluded": true,
+  "map_export_enabled": false,
+  "current_indoor_station_coordinates": 0,
+  "individual_dish_prices": 0,
+  "ffm_commit": "9d9680b6a4050fff132eb551c79f7818c8e9e928",
+  "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+  "collected_at": "2026-10-24T23:35:57.591628+08:00"
+}

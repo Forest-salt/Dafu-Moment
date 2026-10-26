@@ -1,0 +1,39 @@
+﻿表,列,仓库PDF物理页,PDF类型,3.0完整列定义,同名及基础类型一致,边界
+check_in,id,89,BIGINT,BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '打卡标识',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+check_in,user_id,89,BIGINT,BIGINT UNSIGNED NOT NULL COMMENT '打卡用户',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+check_in,location_id,89,BIGINT,BIGINT UNSIGNED NOT NULL COMMENT '关联点位（必填）',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+check_in,check_in_date,89,DATE,DATE NOT NULL COMMENT '就餐日期（干饭日历 P12 按此聚合）',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+check_in,visibility,89,TINYINT,TINYINT NOT NULL DEFAULT 1 COMMENT '1=仅记录 2=私有 3=公开',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+check_in,note,89,VARCHAR(255),VARCHAR(255) NULL COMMENT '可选随笔',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+check_in,created_at,89,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+check_in,updated_at,89,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+check_in,deleted_at,89,DATETIME,DATETIME NULL COMMENT '软删除时间',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+achievement,id,90-91,BIGINT,BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '成就定义标识',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+achievement,metric_type,90-91,TINYINT,TINYINT NOT NULL COMMENT '1=打卡次数 2=不同点位数 3=评价数量 4=获赞数',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+achievement,target_value,90-91,INT,INT NOT NULL COMMENT '解锁目标值（拟定：100/30/50/500）',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+achievement,title,90-91,VARCHAR(64),VARCHAR(64) NOT NULL COMMENT '成就标题',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+achievement,description,90-91,VARCHAR(255),VARCHAR(255) NULL COMMENT '成就说明文案',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+user_achievement,id,91,BIGINT,BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '用户成就行标识',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+user_achievement,user_id,91,BIGINT,BIGINT UNSIGNED NOT NULL COMMENT '进度归属用户',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+user_achievement,achievement_id,91,BIGINT,BIGINT UNSIGNED NOT NULL COMMENT '对应成就定义',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+user_achievement,progress,91,INT,INT NOT NULL DEFAULT 0 COMMENT '当前进度值',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+user_achievement,unlocked,91,TINYINT(1),TINYINT(1) NOT NULL DEFAULT 0 COMMENT '是否已解锁（每25%一档为展示层）',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+user_achievement,updated_at,91,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最近刷新时间',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+pet,id,91,BIGINT,BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '宠物标识',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+pet,user_id,91,BIGINT,BIGINT UNSIGNED NOT NULL COMMENT '宠物归属用户（1:1）',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+pet,skin,91,VARCHAR(64),VARCHAR(64) NULL COMMENT '宠物外观（表情/装扮切换）',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+pet,status,91,TINYINT,TINYINT NOT NULL DEFAULT 0 COMMENT '0=正常 1=饥饿（派生缓存，每日重算禁手工写）',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+pet,level,91,INT,INT NULL COMMENT '宠物等级（P14 等级进度条）',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+pet,lit_days,91,INT,INT NULL COMMENT '累计点亮天数（P14）',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+pet,created_at,91,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+pet,updated_at,91,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+pet,deleted_at,91,DATETIME,DATETIME NULL COMMENT '软删除时间',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+dietary_profile,id,78,BIGINT,BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '档案标识',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+dietary_profile,user_id,78,BIGINT,BIGINT UNSIGNED NOT NULL COMMENT '所属用户',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+dietary_profile,budget_min,78,"DECIMAL(10,2)","DECIMAL(10,2) NULL COMMENT '预算下限'",True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+dietary_profile,budget_max,78,"DECIMAL(10,2)","DECIMAL(10,2) NULL COMMENT '预算上限'",True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+dietary_profile,is_vegetarian,78,TINYINT(1),TINYINT(1) NOT NULL DEFAULT 0 COMMENT '素食偏好：0=否 1=是',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+dietary_profile,taste_preference,78,VARCHAR(64),VARCHAR(64) NULL COMMENT '口味偏好（自由文本）',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+dietary_profile,created_at,78,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+dietary_profile,updated_at,78,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容
+dietary_profile,deleted_at,78,DATETIME,DATETIME NULL COMMENT '软删除时间',True,PDF未完整列出的UNSIGNED/可空/默认值等，以本次收到的3.0DDL为数据包依据；不等于22表工程已兼容

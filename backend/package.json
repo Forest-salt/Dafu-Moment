@@ -5,8 +5,10 @@
     "description": "DAFU MOMENT 后端：Express 单体分层 + MySQL8 + Redis + MinIO",
     "main": "src/index.js",
     "scripts": {
-        "start": "node src/index.js",
-        "dev": "node src/index.js"
+        "start": "node src/index3.js",
+        "dev": "node src/index3.js",
+        "start:db3": "node src/index3.js",
+        "start:legacy": "node src/index.js"
     },
     "dependencies": {
         "bcryptjs": "^2.4.3",
