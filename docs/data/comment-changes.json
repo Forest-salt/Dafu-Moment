@@ -1,0 +1,548 @@
+[
+  {
+    "table": "user",
+    "column": "id",
+    "line": 16,
+    "definition": "BIGINT PRIMARY KEY AUTO_INCREMENT",
+    "comment": "主键标识"
+  },
+  {
+    "table": "canteen",
+    "column": "id",
+    "line": 36,
+    "definition": "INT PRIMARY KEY AUTO_INCREMENT",
+    "comment": "主键标识"
+  },
+  {
+    "table": "canteen",
+    "column": "campus",
+    "line": 39,
+    "definition": "VARCHAR(32) NOT NULL DEFAULT '旗山校区'",
+    "comment": "所属校区"
+  },
+  {
+    "table": "station",
+    "column": "id",
+    "line": 52,
+    "definition": "INT PRIMARY KEY AUTO_INCREMENT",
+    "comment": "主键标识"
+  },
+  {
+    "table": "station",
+    "column": "canteen_id",
+    "line": 53,
+    "definition": "INT NOT NULL",
+    "comment": "所属点位ID（canteen.id）"
+  },
+  {
+    "table": "station",
+    "column": "created_at",
+    "line": 59,
+    "definition": "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP",
+    "comment": "创建时间"
+  },
+  {
+    "table": "dish",
+    "column": "id",
+    "line": 65,
+    "definition": "INT PRIMARY KEY AUTO_INCREMENT",
+    "comment": "主键标识"
+  },
+  {
+    "table": "dish",
+    "column": "station_id",
+    "line": 66,
+    "definition": "INT NOT NULL",
+    "comment": "所属档口ID（station.id）"
+  },
+  {
+    "table": "dish",
+    "column": "name",
+    "line": 67,
+    "definition": "VARCHAR(64) NOT NULL",
+    "comment": "名称"
+  },
+  {
+    "table": "dish",
+    "column": "cover_object_key",
+    "line": 72,
+    "definition": "VARCHAR(255) NULL",
+    "comment": "封面图MinIO对象键"
+  },
+  {
+    "table": "dish",
+    "column": "created_at",
+    "line": 75,
+    "definition": "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP",
+    "comment": "创建时间"
+  },
+  {
+    "table": "dish",
+    "column": "updated_at",
+    "line": 76,
+    "definition": "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
+    "comment": "更新时间"
+  },
+  {
+    "table": "review_dimension",
+    "column": "id",
+    "line": 83,
+    "definition": "INT PRIMARY KEY AUTO_INCREMENT",
+    "comment": "主键标识"
+  },
+  {
+    "table": "review",
+    "column": "id",
+    "line": 93,
+    "definition": "BIGINT PRIMARY KEY AUTO_INCREMENT",
+    "comment": "主键标识"
+  },
+  {
+    "table": "review",
+    "column": "user_id",
+    "line": 94,
+    "definition": "BIGINT NOT NULL",
+    "comment": "所属用户ID（user.id）"
+  },
+  {
+    "table": "review",
+    "column": "subject_id",
+    "line": 96,
+    "definition": "INT NOT NULL",
+    "comment": "目标ID，由subject_type指定目标表"
+  },
+  {
+    "table": "review",
+    "column": "created_at",
+    "line": 107,
+    "definition": "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP",
+    "comment": "创建时间"
+  },
+  {
+    "table": "review",
+    "column": "updated_at",
+    "line": 108,
+    "definition": "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
+    "comment": "更新时间"
+  },
+  {
+    "table": "review_image",
+    "column": "id",
+    "line": 116,
+    "definition": "BIGINT PRIMARY KEY AUTO_INCREMENT",
+    "comment": "主键标识"
+  },
+  {
+    "table": "review_image",
+    "column": "review_id",
+    "line": 117,
+    "definition": "BIGINT NOT NULL",
+    "comment": "所属评价ID（review.id）"
+  },
+  {
+    "table": "review_summary",
+    "column": "subject_type",
+    "line": 125,
+    "definition": "TINYINT NOT NULL",
+    "comment": "目标类型：0菜品、1档口、2点位"
+  },
+  {
+    "table": "review_summary",
+    "column": "subject_id",
+    "line": 126,
+    "definition": "INT NOT NULL",
+    "comment": "目标ID，由subject_type指定目标表"
+  },
+  {
+    "table": "review_summary",
+    "column": "hist_1",
+    "line": 131,
+    "definition": "INT NOT NULL DEFAULT 0",
+    "comment": "四舍五入后归入1星桶的已发布评价数"
+  },
+  {
+    "table": "review_summary",
+    "column": "hist_2",
+    "line": 132,
+    "definition": "INT NOT NULL DEFAULT 0",
+    "comment": "四舍五入后归入2星桶的已发布评价数"
+  },
+  {
+    "table": "review_summary",
+    "column": "hist_3",
+    "line": 133,
+    "definition": "INT NOT NULL DEFAULT 0",
+    "comment": "四舍五入后归入3星桶的已发布评价数"
+  },
+  {
+    "table": "review_summary",
+    "column": "hist_4",
+    "line": 134,
+    "definition": "INT NOT NULL DEFAULT 0",
+    "comment": "四舍五入后归入4星桶的已发布评价数"
+  },
+  {
+    "table": "review_summary",
+    "column": "hist_5",
+    "line": 135,
+    "definition": "INT NOT NULL DEFAULT 0",
+    "comment": "四舍五入后归入5星桶的已发布评价数"
+  },
+  {
+    "table": "favorite",
+    "column": "user_id",
+    "line": 142,
+    "definition": "BIGINT NOT NULL",
+    "comment": "所属用户ID（user.id）"
+  },
+  {
+    "table": "favorite",
+    "column": "subject_type",
+    "line": 143,
+    "definition": "TINYINT NOT NULL",
+    "comment": "目标类型：0菜品、1档口、2点位"
+  },
+  {
+    "table": "favorite",
+    "column": "subject_id",
+    "line": 144,
+    "definition": "INT NOT NULL",
+    "comment": "目标ID，由subject_type指定目标表"
+  },
+  {
+    "table": "favorite",
+    "column": "created_at",
+    "line": 146,
+    "definition": "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP",
+    "comment": "创建时间"
+  },
+  {
+    "table": "review_like",
+    "column": "id",
+    "line": 152,
+    "definition": "BIGINT PRIMARY KEY AUTO_INCREMENT",
+    "comment": "主键标识"
+  },
+  {
+    "table": "review_like",
+    "column": "created_at",
+    "line": 155,
+    "definition": "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP",
+    "comment": "创建时间"
+  },
+  {
+    "table": "report",
+    "column": "id",
+    "line": 162,
+    "definition": "BIGINT PRIMARY KEY AUTO_INCREMENT",
+    "comment": "主键标识"
+  },
+  {
+    "table": "report",
+    "column": "reporter_id",
+    "line": 163,
+    "definition": "BIGINT NOT NULL",
+    "comment": "举报人ID（user.id）"
+  },
+  {
+    "table": "report",
+    "column": "subject_type",
+    "line": 164,
+    "definition": "TINYINT NOT NULL",
+    "comment": "举报目标类型（既有接口允许0、1、2；目标映射按业务接口）"
+  },
+  {
+    "table": "report",
+    "column": "detail",
+    "line": 167,
+    "definition": "VARCHAR(300) NOT NULL DEFAULT ''",
+    "comment": "举报补充说明"
+  },
+  {
+    "table": "report",
+    "column": "handled_by",
+    "line": 169,
+    "definition": "BIGINT NULL",
+    "comment": "处理管理员ID（user.id），未处理时为空"
+  },
+  {
+    "table": "report",
+    "column": "handled_at",
+    "line": 170,
+    "definition": "DATETIME NULL",
+    "comment": "处理时间，未处理时为空"
+  },
+  {
+    "table": "report",
+    "column": "created_at",
+    "line": 171,
+    "definition": "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP",
+    "comment": "创建时间"
+  },
+  {
+    "table": "station_post",
+    "column": "id",
+    "line": 177,
+    "definition": "BIGINT PRIMARY KEY AUTO_INCREMENT",
+    "comment": "主键标识"
+  },
+  {
+    "table": "station_post",
+    "column": "station_id",
+    "line": 178,
+    "definition": "INT NOT NULL",
+    "comment": "所属档口ID（station.id）"
+  },
+  {
+    "table": "station_post",
+    "column": "author_id",
+    "line": 179,
+    "definition": "BIGINT NOT NULL",
+    "comment": "公告作者ID（user.id）"
+  },
+  {
+    "table": "station_post",
+    "column": "content",
+    "line": 181,
+    "definition": "VARCHAR(200) NOT NULL",
+    "comment": "正文内容"
+  },
+  {
+    "table": "station_post",
+    "column": "starts_at",
+    "line": 182,
+    "definition": "DATETIME NULL",
+    "comment": "生效开始时间"
+  },
+  {
+    "table": "station_post",
+    "column": "ends_at",
+    "line": 183,
+    "definition": "DATETIME NULL",
+    "comment": "生效结束时间"
+  },
+  {
+    "table": "station_post",
+    "column": "created_at",
+    "line": 184,
+    "definition": "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP",
+    "comment": "创建时间"
+  },
+  {
+    "table": "banned_word",
+    "column": "id",
+    "line": 190,
+    "definition": "INT PRIMARY KEY AUTO_INCREMENT",
+    "comment": "主键标识"
+  },
+  {
+    "table": "banned_word",
+    "column": "word",
+    "line": 191,
+    "definition": "VARCHAR(64) NOT NULL UNIQUE",
+    "comment": "敏感词文本"
+  },
+  {
+    "table": "notification",
+    "column": "id",
+    "line": 197,
+    "definition": "BIGINT PRIMARY KEY AUTO_INCREMENT",
+    "comment": "主键标识"
+  },
+  {
+    "table": "notification",
+    "column": "user_id",
+    "line": 198,
+    "definition": "BIGINT NOT NULL",
+    "comment": "所属用户ID（user.id）"
+  },
+  {
+    "table": "notification",
+    "column": "title",
+    "line": 200,
+    "definition": "VARCHAR(100) NOT NULL",
+    "comment": "通知标题"
+  },
+  {
+    "table": "notification",
+    "column": "content",
+    "line": 201,
+    "definition": "VARCHAR(500) NOT NULL DEFAULT ''",
+    "comment": "正文内容"
+  },
+  {
+    "table": "notification",
+    "column": "ref_type",
+    "line": 202,
+    "definition": "VARCHAR(32) NULL",
+    "comment": "关联业务类型"
+  },
+  {
+    "table": "notification",
+    "column": "ref_id",
+    "line": 203,
+    "definition": "BIGINT NULL",
+    "comment": "关联业务记录ID，由ref_type指定含义"
+  },
+  {
+    "table": "notification",
+    "column": "read_at",
+    "line": 204,
+    "definition": "DATETIME NULL",
+    "comment": "已读时间，未读时为空"
+  },
+  {
+    "table": "notification",
+    "column": "created_at",
+    "line": 205,
+    "definition": "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP",
+    "comment": "创建时间"
+  },
+  {
+    "table": "review_reply",
+    "column": "id",
+    "line": 211,
+    "definition": "BIGINT PRIMARY KEY AUTO_INCREMENT",
+    "comment": "主键标识"
+  },
+  {
+    "table": "review_reply",
+    "column": "review_id",
+    "line": 212,
+    "definition": "BIGINT NOT NULL UNIQUE",
+    "comment": "所属评价ID（review.id）"
+  },
+  {
+    "table": "review_reply",
+    "column": "user_id",
+    "line": 213,
+    "definition": "BIGINT NOT NULL",
+    "comment": "所属用户ID（user.id）"
+  },
+  {
+    "table": "review_reply",
+    "column": "content",
+    "line": 214,
+    "definition": "VARCHAR(500) NOT NULL",
+    "comment": "正文内容"
+  },
+  {
+    "table": "review_reply",
+    "column": "created_at",
+    "line": 215,
+    "definition": "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP",
+    "comment": "创建时间"
+  },
+  {
+    "table": "point_submit",
+    "column": "id",
+    "line": 220,
+    "definition": "BIGINT PRIMARY KEY AUTO_INCREMENT",
+    "comment": "主键标识"
+  },
+  {
+    "table": "point_submit",
+    "column": "created_at",
+    "line": 228,
+    "definition": "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP",
+    "comment": "创建时间"
+  },
+  {
+    "table": "ai_conversation",
+    "column": "id",
+    "line": 234,
+    "definition": "BIGINT PRIMARY KEY AUTO_INCREMENT",
+    "comment": "主键标识"
+  },
+  {
+    "table": "ai_conversation",
+    "column": "user_id",
+    "line": 235,
+    "definition": "BIGINT NOT NULL",
+    "comment": "所属用户ID（user.id）"
+  },
+  {
+    "table": "ai_conversation",
+    "column": "created_at",
+    "line": 240,
+    "definition": "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP",
+    "comment": "创建时间"
+  },
+  {
+    "table": "ai_provider",
+    "column": "id",
+    "line": 246,
+    "definition": "INT PRIMARY KEY AUTO_INCREMENT",
+    "comment": "主键标识"
+  },
+  {
+    "table": "ai_model",
+    "column": "id",
+    "line": 262,
+    "definition": "BIGINT PRIMARY KEY AUTO_INCREMENT",
+    "comment": "主键标识"
+  },
+  {
+    "table": "ai_model",
+    "column": "created_at",
+    "line": 272,
+    "definition": "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP",
+    "comment": "创建时间"
+  },
+  {
+    "table": "ai_platform_model",
+    "column": "id",
+    "line": 279,
+    "definition": "BIGINT PRIMARY KEY AUTO_INCREMENT",
+    "comment": "主键标识"
+  },
+  {
+    "table": "ai_platform_model",
+    "column": "created_at",
+    "line": 287,
+    "definition": "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP",
+    "comment": "创建时间"
+  },
+  {
+    "table": "sticker",
+    "column": "id",
+    "line": 292,
+    "definition": "BIGINT AUTO_INCREMENT PRIMARY KEY",
+    "comment": "主键标识"
+  },
+  {
+    "table": "sticker",
+    "column": "user_id",
+    "line": 293,
+    "definition": "BIGINT NOT NULL",
+    "comment": "所属用户ID（user.id）"
+  },
+  {
+    "table": "sticker",
+    "column": "created_at",
+    "line": 297,
+    "definition": "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP",
+    "comment": "创建时间"
+  },
+  {
+    "table": "journal",
+    "column": "id",
+    "line": 303,
+    "definition": "BIGINT AUTO_INCREMENT PRIMARY KEY",
+    "comment": "主键标识"
+  },
+  {
+    "table": "journal",
+    "column": "user_id",
+    "line": 304,
+    "definition": "BIGINT NOT NULL",
+    "comment": "所属用户ID（user.id）"
+  },
+  {
+    "table": "journal",
+    "column": "created_at",
+    "line": 312,
+    "definition": "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP",
+    "comment": "创建时间"
+  }
+]

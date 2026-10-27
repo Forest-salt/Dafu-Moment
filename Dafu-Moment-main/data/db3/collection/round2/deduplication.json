@@ -1,0 +1,50 @@
+[
+  {
+    "source_id": "qishan-009",
+    "source_name": "玫瑰园",
+    "canonical_name": "玫瑰园食惠餐厅",
+    "reason": "人工明确的同一食堂简称映射，不另建点位"
+  },
+  {
+    "source_id": "qishan-010",
+    "source_name": "芙蓉园",
+    "canonical_name": "芙蓉园兴安餐厅",
+    "reason": "人工明确的同一食堂简称映射，不另建点位"
+  },
+  {
+    "source_id": "qishan-011",
+    "source_name": "紫荆园",
+    "canonical_name": "紫荆园捷祥餐厅",
+    "reason": "人工明确的同一食堂简称映射，不另建点位"
+  },
+  {
+    "source_id": "qishan-012",
+    "source_name": "牡丹园",
+    "canonical_name": "牡丹园清谷餐厅",
+    "reason": "人工明确的同一食堂简称映射，不另建点位"
+  },
+  {
+    "source_id": "qishan-013",
+    "source_name": "丁香园",
+    "canonical_name": "丁香园品膳餐厅",
+    "reason": "人工明确的同一食堂简称映射，不另建点位"
+  },
+  {
+    "source_id": "qishan-014",
+    "source_name": "丹桂园",
+    "canonical_name": "丹桂园朝阳餐厅",
+    "reason": "人工明确的同一食堂简称映射，不另建点位"
+  },
+  {
+    "source_id": "qishan-015",
+    "source_name": "百合园",
+    "canonical_name": "百合园立品餐厅",
+    "reason": "人工明确的同一食堂简称映射，不另建点位"
+  },
+  {
+    "source_id": "qishan-016",
+    "source_name": "茉莉园",
+    "canonical_name": "茉莉园聚誉餐厅",
+    "reason": "人工明确的同一食堂简称映射，不另建点位"
+  }
+]

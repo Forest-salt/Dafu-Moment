@@ -1,0 +1,93 @@
+{
+  "production_database_accessed": false,
+  "sql_regression_groups": 10,
+  "service_regression_groups": 13,
+  "files": [
+    {
+      "path": "backend/src/app3.js",
+      "sha256": "d6b49e4121bea99971ea589cc9b9bf4fb74df16cbb1f342d2bb12b3fd6d3fad2"
+    },
+    {
+      "path": "backend/src/index3.js",
+      "sha256": "b7a4fdd84f30d10c8b6630deec4c74e2cd03b9d69a1c4ef81276ecec0bd579f9"
+    },
+    {
+      "path": "backend/src/db/schema3.js",
+      "sha256": "49a50afa56f65d50d8476a271ace67876321f68ccc7c2f5b27cf467a993972cf"
+    },
+    {
+      "path": "backend/src/routes/db3.js",
+      "sha256": "8375f771168d76461d7f3e38d3ab39f7cc29e337e8514f9af938c2b709c62879"
+    },
+    {
+      "path": "backend/src/index.js",
+      "sha256": "8bf728942e48c61dfbcc7058ce319c6df0444a9f24dc667ce76151d5df2989da"
+    },
+    {
+      "path": "backend/src/config.js",
+      "sha256": "621ab8e44809437373bad5940455f9fabfc1cfd5ffefbfe26c6c3ee2cde34338"
+    },
+    {
+      "path": "backend/src/middleware/error.js",
+      "sha256": "55c70eeacc170a971be1a06449f21abd75ab1dcbc8291a8b8bcca93575259887"
+    },
+    {
+      "path": "backend/src/services/checkin.service.js",
+      "sha256": "70e1b10639cdb67e146acd65a4a86a0afb7488367d91661cf065a2af1482773d"
+    },
+    {
+      "path": "backend/tools/test_db3_services.js",
+      "sha256": "f79ec72447b24c1e2537da3ae72f8a082d05afeb776321021771c1b9325c6c5e"
+    },
+    {
+      "path": "backend/src/services/cascade3.js",
+      "sha256": "221b7c389433418e156866a22eb2690fa1d45ee952ea6f92cb6544f7b3bfe3bc"
+    },
+    {
+      "path": "backend/src/services/identity3.service.js",
+      "sha256": "0a6a2d4d5e3c2d7d4f8aab13e7e7d7068d29c1d687be8420cc01b6be8e3919aa"
+    },
+    {
+      "path": "backend/src/services/interaction3.service.js",
+      "sha256": "0dc5bf77b74fbe93d47a548e2749d2697f750ee747df766fa3f8e3cdb53038ac"
+    },
+    {
+      "path": "backend/src/services/journal3.service.js",
+      "sha256": "f87be5a76b75084bf0eee2e7083b623bb83bc3196a93505be875476948a90f43"
+    },
+    {
+      "path": "backend/src/services/media3.service.js",
+      "sha256": "56124a04fd09b59ced86035cd4652f5ae0de3531c3189f812696cb7cb60659f6"
+    },
+    {
+      "path": "backend/src/services/pet3.service.js",
+      "sha256": "ac2b1df5d95314945c413b10a421375e1e92cd3897a9f51d05aa3699ceaea229"
+    },
+    {
+      "path": "backend/src/services/profile3.service.js",
+      "sha256": "18929a720cb686fcb02b20730b8fc6472a6ee5343e702dda70cdf668bb71dca2"
+    },
+    {
+      "path": "backend/src/services/review3.service.js",
+      "sha256": "67d644f330f86e4e71f223fefd3d348b2e16770b5030a3753570e3dde94d96b0"
+    },
+    {
+      "path": "backend/src/services/task3.service.js",
+      "sha256": "d5693a9367bf2b366f76063dea240b636737b77c0995a5a674b34ec773940445"
+    },
+    {
+      "path": "backend/package.json",
+      "sha256": "059efa8a7905d9a77d1d52cac9a2d7f49c3e80a4e3dee24988acf47e7eb3f7a3"
+    },
+    {
+      "path": "backend/package-lock.json",
+      "sha256": "79cb12da28e3120e35abd36d049aeb9fffa2196f0f162122af9775855ff0bf4c"
+    },
+    {
+      "path": "data/db3/sql/02_dictionary_seed.sql",
+      "sha256": "6471e55be69fbc6e3232c71a77cdc03c4b9ebc05bda95b7e3e5b6552ec1a6b79"
+    }
+  ],
+  "verified_on": "2026-10-25",
+  "scope": "Local isolated verification before committing backend adaptation and data updates; no push, merge or production execution"
+}

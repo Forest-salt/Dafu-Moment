@@ -1,0 +1,47 @@
+{
+  "mysql_version": "8.0.46",
+  "isolated_server": true,
+  "production_accessed": false,
+  "results": [
+    {
+      "check": "migration_twice_preserves_data_and_structure",
+      "passed": true,
+      "detail": "78 missing comments filled; 191 column properties and all indexes unchanged; sentinel retained"
+    },
+    {
+      "check": "schema_drift_is_refused",
+      "passed": true,
+      "detail": "Existing changed type is not reverted silently"
+    },
+    {
+      "check": "rollback_twice_preserves_data_and_structure",
+      "passed": true,
+      "detail": "Only patch comments removed; data and indexes retained"
+    },
+    {
+      "check": "raw_sql_skips_changed_column_definition",
+      "passed": true,
+      "detail": "Even direct SQL does not reset a changed target column type"
+    },
+    {
+      "check": "existing_team_comments_preserved",
+      "passed": true,
+      "detail": "Nonempty annotation is never overwritten"
+    },
+    {
+      "check": "inspection_detects_fault_without_repair",
+      "passed": true,
+      "detail": "Injected orphan counted; read-only script did not delete or modify it"
+    },
+    {
+      "check": "metadata_snapshot_excludes_rows_and_refuses_overwrite",
+      "passed": true,
+      "detail": "Structure, counts and commit only; existing snapshot not replaced"
+    },
+    {
+      "check": "new_database_init_twice",
+      "passed": true,
+      "detail": "Fresh init repeatable; 22 tables / 191 columns, unchanged schema and indexes"
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+﻿表,列,代码类型,代码定义_改注释前,PDF类型,PDF说明,PDF物理页,结论,处置
+user,id,BIGINT,BIGINT PRIMARY KEY AUTO_INCREMENT,BIGINT,用户唯一标识,77,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+user,username,VARCHAR(32),VARCHAR(32) NOT NULL UNIQUE COMMENT '登录名',,,77,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+user,password,VARCHAR(72),VARCHAR(72) NOT NULL COMMENT 'bcryptjs',,,77,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+user,nickname,VARCHAR(32),VARCHAR(32) NOT NULL COMMENT '展示名',VARCHAR(64),昵称,77,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+user,email,VARCHAR(128),VARCHAR(128) NULL COMMENT '邮箱（个人资料选填）',,,77,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+user,avatar,TINYINT,TINYINT NOT NULL DEFAULT 0 COMMENT '预设头像编号',VARCHAR(255),头像（MinIO object_key，确认 0.4）,77,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+user,avatar_object_key,VARCHAR(255),VARCHAR(255) NULL COMMENT '自定义头像 MinIO objectKey',,,77,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+user,fzu_uid,VARCHAR(16),VARCHAR(16) NULL UNIQUE COMMENT '福大统一身份认证学号/工号（绑定后唯一，SSO 登录凭据）',,,77,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+user,fzu_name,VARCHAR(32),VARCHAR(32) NULL COMMENT 'CAS 返回的真实姓名（福大认证头衔展示）',,,77,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+user,fzu_verified,TINYINT(1),TINYINT(1) NOT NULL DEFAULT 0 COMMENT '0 未认证 / 1 已绑定福大统一身份认证',,,77,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+user,ai_config,JSON,"JSON NULL COMMENT 'AI 自定义配置 {baseUrl,apiKey,model}（OpenAI 兼容）'",,,77,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+user,role,TINYINT,TINYINT NOT NULL DEFAULT 0 COMMENT '0 学生 / 1 管理员',,,77,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+user,status,TINYINT,TINYINT NOT NULL DEFAULT 0 COMMENT '0 正常 / 1 禁言 / 2 封禁',TINYINT,0=正常 1=禁言 2=封禁 3=注销,77,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+user,muted_until,DATETIME,DATETIME NULL COMMENT '禁言到期时间',,,77,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+user,last_login_at,DATETIME,DATETIME NULL COMMENT '最近登录时间（登录成功写入）',DATETIME,最近登录时间,77,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+user,created_at,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间（审计/看板趋势基准）',DATETIME,创建时间,77,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+canteen,id,INT,INT PRIMARY KEY AUTO_INCREMENT,BIGINT,食区标识,81,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+canteen,name,VARCHAR(64),VARCHAR(64) NOT NULL UNIQUE COMMENT '如「旗山校区·京元餐厅」',VARCHAR(64),食区名称（一食堂/二食堂/永嘉天地等）,82,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+canteen,type,TINYINT,TINYINT NOT NULL DEFAULT 0 COMMENT '0 校内食堂 / 1 永嘉天地 / 2 学生街 / 3 周边其他',TINYINT,食区类型（取值待产品定，QC-20）,82,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+canteen,campus,VARCHAR(32),VARCHAR(32) NOT NULL DEFAULT '旗山校区',TINYINT,校区（取值待产品定，QC-20）,82,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+canteen,location,VARCHAR(128),VARCHAR(128) NOT NULL DEFAULT '' COMMENT '楼栋/方位描述',,,81,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+canteen,avg_price,"DECIMAL(6,1)","DECIMAL(6, 1) NULL COMMENT '人均消费（元）'",,,81,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+canteen,lat,"DECIMAL(10,6)","DECIMAL(10, 6) NULL COMMENT '地图纬度（GCJ-02 火星坐标，后台拖拽校准）'","DECIMAL(10,7)",食区中心纬度（GCJ-02 坐标系入库）,82,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+canteen,lng,"DECIMAL(10,6)","DECIMAL(10, 6) NULL COMMENT '地图经度（GCJ-02 火星坐标，后台拖拽校准）'","DECIMAL(10,7)",食区中心经度（GCJ-02 坐标系入库）,82,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+canteen,cover_object_key,VARCHAR(255),VARCHAR(255) NULL COMMENT 'MinIO objectKey',,,81,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+canteen,tags,JSON,"JSON NULL COMMENT '标签数组，如 [""清真"",""平价""]，忌口筛选与推荐用'",,,81,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+canteen,created_by,BIGINT,BIGINT UNSIGNED NULL COMMENT '录入人（后台创建记管理员 / 提交审核通过记提交人）',,,81,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+canteen,enabled,TINYINT,TINYINT NOT NULL DEFAULT 1 COMMENT '上下架开关：1 在架 / 0 下架',,,81,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+station,id,INT,INT PRIMARY KEY AUTO_INCREMENT,BIGINT,档口标识,83,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+station,canteen_id,INT,INT NOT NULL,,,83,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+station,name,VARCHAR(64),VARCHAR(64) NOT NULL COMMENT '如「三楼麻辣香锅」',VARCHAR(128),档口名称,83,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+station,category,VARCHAR(32),VARCHAR(32) NOT NULL DEFAULT '' COMMENT '品类（筛选用）',,,83,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+station,cover_object_key,VARCHAR(255),VARCHAR(255) NULL COMMENT '封面图 MinIO objectKey',,,83,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+station,status,TINYINT,TINYINT NOT NULL DEFAULT 0 COMMENT '0 营业 / 1 休摊 / 2 下架',TINYINT,0=停业/撤销 1=正常（撤销保留历史评价与打,83,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+station,manager_user_id,BIGINT,BIGINT NULL COMMENT '档口负责人',,,83,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+station,created_at,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,DATETIME,创建时间,83,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+dish,id,INT,INT PRIMARY KEY AUTO_INCREMENT,BIGINT,菜品唯一标识,83,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+dish,station_id,INT,INT NOT NULL,BIGINT,所属档口,83,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+dish,name,VARCHAR(64),VARCHAR(64) NOT NULL,VARCHAR(128),菜品名称,83,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+dish,price,"DECIMAL(6,1)","DECIMAL(6, 1) NOT NULL DEFAULT 0 COMMENT '元'","DECIMAL(10,2)",单价,83,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+dish,taste_tags,VARCHAR(128),"VARCHAR(128) NOT NULL DEFAULT '' COMMENT '口味：偏辣,少油…'",,,83,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+dish,taboo_tags,VARCHAR(128),"VARCHAR(128) NOT NULL DEFAULT '' COMMENT '忌口：清真,素食,无香菜,无葱蒜'",,,83,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+dish,is_recommended,TINYINT(1),TINYINT(1) NOT NULL DEFAULT 0 COMMENT '推荐菜标记（管理员标记/聚合修正）',,,83,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+dish,cover_object_key,VARCHAR(255),VARCHAR(255) NULL,,,83,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+dish,status,TINYINT,TINYINT NOT NULL DEFAULT 0 COMMENT '0 在售 / 1 下架',TINYINT,0=待审核 1=正常 2=停用（审核前不入公共搜,84,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+dish,first_seen_at,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '上新时间（新品排序口径）',,,83,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+dish,created_at,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,DATETIME,创建时间,84,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+dish,updated_at,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,DATETIME,更新时间,84,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+review_dimension,id,INT,INT PRIMARY KEY AUTO_INCREMENT,BIGINT,维度标识,88,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+review_dimension,dimension_key,VARCHAR(32),VARCHAR(32) NOT NULL UNIQUE COMMENT '维度键，写入 review.dimension_scores',,,88,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review_dimension,dimension_name,VARCHAR(32),VARCHAR(32) NOT NULL COMMENT '展示名，如「口味」',,,88,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review_dimension,applicable_types,JSON,"JSON NOT NULL COMMENT '适用的点位类型数组，如 [0,1,2,3]'",,,88,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review_dimension,weight,"DECIMAL(3,2)","DECIMAL(3, 2) NOT NULL DEFAULT 1.00 COMMENT '聚合总分权重'",,,88,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review_dimension,sort,INT,INT NOT NULL DEFAULT 0 COMMENT '表单展示顺序',INT,打分组件展示顺序,88,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+review,id,BIGINT,BIGINT PRIMARY KEY AUTO_INCREMENT,BIGINT,评价标识,85,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+review,user_id,BIGINT,BIGINT NOT NULL,BIGINT,评价用户,85,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+review,subject_type,TINYINT,TINYINT NOT NULL COMMENT '0 菜品 / 1 档口 / 2 点位',,,85,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review,subject_id,INT,INT NOT NULL,,,85,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review,overall_score,"DECIMAL(2,1)","DECIMAL(2, 1) NOT NULL COMMENT '总分 = Σ(分项×权重)/Σ权重，1.0-5.0'",,,85,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review,dimension_scores,JSON,"JSON NOT NULL COMMENT '分项得分，如 {""taste"":5,""portion"":4}，键须过维度适用性校验'",,,85,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review,content,VARCHAR(1000),VARCHAR(1000) NOT NULL DEFAULT '' COMMENT '文字',TEXT,评价文字（可空：文字与图片不可同时为空，,85,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+review,is_anonymous,TINYINT,TINYINT NOT NULL DEFAULT 0 COMMENT '匿名同学',,,85,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review,tags,VARCHAR(128),"VARCHAR(128) NOT NULL DEFAULT '' COMMENT '推荐,踩雷,量大…'",,,85,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review,status,TINYINT,TINYINT NOT NULL DEFAULT 0 COMMENT '0 已发布 / 1 待人工 / 2 已下架 / 3 已驳回',TINYINT,,85,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+review,status_reason,VARCHAR(200),VARCHAR(200) NOT NULL DEFAULT '' COMMENT '处置理由（通知用户用）',,,85,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review,up_count,INT,INT NOT NULL DEFAULT 0 COMMENT '有用投票（冗余计数）',,,85,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review,down_count,INT,INT NOT NULL DEFAULT 0 COMMENT '没用投票（冗余计数）',,,85,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review,like_count,INT,INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '点赞数（review_like 冗余计数）',,,85,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review,created_at,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,DATETIME,创建时间,85,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+review,updated_at,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,DATETIME,更新时间,85,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+review_image,id,BIGINT,BIGINT PRIMARY KEY AUTO_INCREMENT,BIGINT,图片行标识,86,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+review_image,review_id,BIGINT,BIGINT NOT NULL,BIGINT,所属评价,86,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+review_image,object_key,VARCHAR(255),VARCHAR(255) NOT NULL COMMENT 'MinIO 路径',VARCHAR(255),MinIO 对象键,86,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+review_image,status,TINYINT,TINYINT NOT NULL DEFAULT 0 COMMENT '0 正常 / 1 违规（连带评价下架）',,,86,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review_summary,subject_type,TINYINT,TINYINT NOT NULL,,,88,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review_summary,subject_id,INT,INT NOT NULL,,,88,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review_summary,review_count,INT,INT NOT NULL DEFAULT 0 COMMENT '已发布数',INT,参与统计的评价数（原 count，改名避免保留,88,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+review_summary,sum_score,"DECIMAL(10,2)","DECIMAL(10, 2) NOT NULL DEFAULT 0 COMMENT 'Σ overall_score'",,,88,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review_summary,rating_avg,"DECIMAL(3,2)","DECIMAL(3, 2) NOT NULL DEFAULT 0 COMMENT '普通平均分'",,,88,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review_summary,dim_sums,JSON,"JSON NULL COMMENT '分项求和 {""taste"":48,…}，均分 = dim_sums/review_count'",,,88,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review_summary,hist_1,INT,INT NOT NULL DEFAULT 0,,,88,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review_summary,hist_2,INT,INT NOT NULL DEFAULT 0,,,88,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review_summary,hist_3,INT,INT NOT NULL DEFAULT 0,,,88,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review_summary,hist_4,INT,INT NOT NULL DEFAULT 0,,,88,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review_summary,hist_5,INT,INT NOT NULL DEFAULT 0,,,88,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review_summary,recalc_at,DATETIME,DATETIME NULL COMMENT '最近重算时间（观测漂移）',,,88,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+favorite,user_id,BIGINT,BIGINT NOT NULL,BIGINT,收藏用户,86,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+favorite,subject_type,TINYINT,TINYINT NOT NULL,,,86,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+favorite,subject_id,INT,INT NOT NULL,,,86,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+favorite,list_type,TINYINT,TINYINT NOT NULL DEFAULT 0 COMMENT '0 想吃（唯一收藏语义，保留列位兼容）',,,86,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+favorite,created_at,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,DATETIME,收藏时间,87,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+review_like,id,BIGINT,BIGINT PRIMARY KEY AUTO_INCREMENT,BIGINT,点赞记录,86,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+review_like,user_id,BIGINT,BIGINT NOT NULL COMMENT '点赞人',BIGINT,点赞用户,86,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+review_like,review_id,BIGINT,BIGINT NOT NULL COMMENT '被赞评价',,,86,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review_like,created_at,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,DATETIME,点赞时间,86,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+report,id,BIGINT,BIGINT PRIMARY KEY AUTO_INCREMENT,BIGINT,举报记录,87,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+report,reporter_id,BIGINT,BIGINT NOT NULL,BIGINT,举报用户,87,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+report,subject_type,TINYINT,TINYINT NOT NULL,,,87,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+report,subject_id,INT,INT NOT NULL COMMENT '此处为 review.id',,,87,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+report,reason,TINYINT,TINYINT NOT NULL COMMENT '1 垃圾广告 / 2 人身攻击 / 3 虚假信息 / 4 抄袭搬运 / 5 其他',TINYINT,1=广告骚扰 2=辱骂攻击 3=虚假信息 4=隐私泄,87,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+report,detail,VARCHAR(300),VARCHAR(300) NOT NULL DEFAULT '',,,87,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+report,status,VARCHAR(16),VARCHAR(16) NOT NULL DEFAULT 'open' COMMENT 'open/resolved/rejected',TINYINT,0=待处理 1=已处理 2=已驳回,87,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+report,handled_by,BIGINT,BIGINT NULL,BIGINT,处理管理员（待处理时为空）,87,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+report,handled_at,DATETIME,DATETIME NULL,DATETIME,处理完成时间,87,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+report,created_at,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,DATETIME,举报时间,87,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+station_post,id,BIGINT,BIGINT PRIMARY KEY AUTO_INCREMENT,BIGINT,公告标识,85,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+station_post,station_id,INT,INT NOT NULL,BIGINT,所属档口（FK→station）,85,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+station_post,author_id,BIGINT,BIGINT NOT NULL,BIGINT,发布人（FK→user）,85,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+station_post,type,VARCHAR(16),VARCHAR(16) NOT NULL COMMENT 'new_dish/menu_change/away/promo',VARCHAR(16),new_dish/menu_change/away/promo,85,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+station_post,content,VARCHAR(200),VARCHAR(200) NOT NULL,VARCHAR(200),公告正文,85,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+station_post,starts_at,DATETIME,DATETIME NULL,DATETIME,生效开始时间,85,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+station_post,ends_at,DATETIME,DATETIME NULL,DATETIME,生效结束时间,85,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+station_post,created_at,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,DATETIME,创建时间,85,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+banned_word,id,INT,INT PRIMARY KEY AUTO_INCREMENT,BIGINT,词库行标识,96,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+banned_word,word,VARCHAR(64),VARCHAR(64) NOT NULL UNIQUE,VARCHAR(64),敏感词,96,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+banned_word,level,TINYINT,TINYINT NOT NULL COMMENT '1 替换 / 2 进人工 / 3 进人工（严重）',,,96,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+notification,id,BIGINT,BIGINT PRIMARY KEY AUTO_INCREMENT,BIGINT,通知标识,94,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+notification,user_id,BIGINT,BIGINT NOT NULL,BIGINT,接收用户,94,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+notification,type,VARCHAR(32),VARCHAR(32) NOT NULL COMMENT 'audit/mute/ban/report/reply/appeal',TINYINT,1=评价获赞 2=帖子互动 3=审核结果 4=举报处,94,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+notification,title,VARCHAR(100),VARCHAR(100) NOT NULL,,,94,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+notification,content,VARCHAR(500),VARCHAR(500) NOT NULL DEFAULT '',VARCHAR(255),通知文案（含跳转摘要）,94,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+notification,ref_type,VARCHAR(32),VARCHAR(32) NULL,,,94,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+notification,ref_id,BIGINT,BIGINT NULL,,,94,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+notification,read_at,DATETIME,DATETIME NULL,,,94,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+notification,created_at,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,DATETIME,通知产生时间（合并组内为首条时间）,94,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+review_reply,id,BIGINT,BIGINT PRIMARY KEY AUTO_INCREMENT,BIGINT,评论标识,94,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+review_reply,review_id,BIGINT,BIGINT NOT NULL UNIQUE,,,94,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+review_reply,user_id,BIGINT,BIGINT NOT NULL,BIGINT,评论作者,94,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+review_reply,content,VARCHAR(500),VARCHAR(500) NOT NULL,TEXT,评论文字,94,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+review_reply,created_at,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,DATETIME,评论时间,94,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+point_submit,id,BIGINT,BIGINT PRIMARY KEY AUTO_INCREMENT,BIGINT,提交标识,97,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+point_submit,submitter_id,BIGINT,BIGINT NOT NULL COMMENT '提交人',BIGINT,提交人（FK→user）,97,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+point_submit,submit_type,TINYINT,TINYINT NOT NULL COMMENT '0 点位 / 1 档口 / 2 菜品',TINYINT,0=点位 1=档口 2=菜品,97,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+point_submit,target_id,INT,INT NULL COMMENT '挂靠对象（提交档口时为点位 ID，提交菜品时为档口 ID）',BIGINT,挂靠对象：提交档口时为点位 ID，提交菜品时,97,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+point_submit,payload,JSON,JSON NOT NULL COMMENT '提交内容（结构同对应主表字段）',JSON,提交内容（结构同对应主表字段）,97,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+point_submit,audit_status,TINYINT,TINYINT NOT NULL DEFAULT 0 COMMENT '0 待审 / 1 通过 / 2 驳回',TINYINT,0=待审 1=通过 2=驳回,97,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+point_submit,auditor_id,BIGINT,BIGINT NULL COMMENT '审核管理员',BIGINT,审核管理员（FK→user）,97,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+point_submit,audit_comment,VARCHAR(255),VARCHAR(255) NOT NULL DEFAULT '' COMMENT '审核意见',,,97,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+point_submit,created_at,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,DATETIME,提交时间,97,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+ai_conversation,id,BIGINT,BIGINT PRIMARY KEY AUTO_INCREMENT,BIGINT,会话标识,100,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+ai_conversation,user_id,BIGINT,BIGINT NOT NULL,BIGINT,会话归属用户,100,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+ai_conversation,question,VARCHAR(500),VARCHAR(500) NOT NULL COMMENT '自然语言提问',,,100,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+ai_conversation,parsed_conditions,JSON,JSON NULL COMMENT '解析出的条件（口味/价格/忌口）',,,100,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+ai_conversation,recommend_ids,JSON,"JSON NULL COMMENT '命中平台对象 [{subjectType,subjectId,name}]'",,,100,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+ai_conversation,answer,TEXT,TEXT NULL COMMENT '模型返回的建议文本',,,100,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+ai_conversation,created_at,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,DATETIME,会话创建时间,100,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+ai_provider,id,INT,INT PRIMARY KEY AUTO_INCREMENT,BIGINT,供应商行标识,100,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+ai_provider,provider_key,VARCHAR(32),VARCHAR(32) NOT NULL COMMENT '供应商标识（存 user.ai_config.provider）',,,100,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+ai_provider,name,VARCHAR(64),VARCHAR(64) NOT NULL COMMENT '显示名',VARCHAR(64),供应商名,100,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+ai_provider,protocol,VARCHAR(16),VARCHAR(16) NOT NULL DEFAULT 'openai' COMMENT '协议：openai 兼容 / anthropic 原生',,,100,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+ai_provider,base_url,VARCHAR(200),VARCHAR(200) NOT NULL DEFAULT '' COMMENT '官方默认接口地址（空=自定义端点）',VARCHAR(255),接口地址（OpenAI 兼容协议）,100,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+ai_provider,console_url,VARCHAR(300),VARCHAR(300) NOT NULL DEFAULT '' COMMENT '控制台/接口文档链接',,,100,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+ai_provider,model_doc_url,VARCHAR(300),VARCHAR(300) NOT NULL DEFAULT '' COMMENT '模型接入文档链接',,,100,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+ai_provider,enabled,TINYINT(1),TINYINT(1) NOT NULL DEFAULT 1 COMMENT '是否启用',,,100,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+ai_provider,sort_order,INT,INT NOT NULL DEFAULT 0 COMMENT '排序（小在前）',,,100,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+ai_model,id,BIGINT,BIGINT PRIMARY KEY AUTO_INCREMENT,BIGINT,配置标识,101,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+ai_model,user_id,BIGINT,BIGINT NOT NULL COMMENT '归属用户',BIGINT,归属用户（FK→user）,101,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+ai_model,platform_id,BIGINT,BIGINT NULL COMMENT '平台托管模型引用（ai_platform_model.id，非空=引用行）',BIGINT,平台托管模型引用（FK→ai_platform_model，,101,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+ai_model,provider_key,VARCHAR(32),VARCHAR(32) NOT NULL COMMENT '供应商标识（ai_provider.provider_key，引用行固定 platform）',VARCHAR(32),供应商标识（引用行固定 platform）,101,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+ai_model,protocol,VARCHAR(16),VARCHAR(16) NOT NULL DEFAULT 'openai' COMMENT '接口类型快照：openai 兼容 / anthropic 原生',,,101,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+ai_model,base_url,VARCHAR(200),VARCHAR(200) NOT NULL DEFAULT '' COMMENT '接口地址',,,101,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+ai_model,model_id,VARCHAR(64),VARCHAR(64) NOT NULL DEFAULT '' COMMENT '模型 ID（官方模型名）',,,101,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+ai_model,display_name,VARCHAR(64),VARCHAR(64) NOT NULL DEFAULT '' COMMENT '模型展示名称（空=显示模型 ID）',,,101,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+ai_model,api_key_cipher,TEXT,TEXT NOT NULL COMMENT 'API 密钥密文（AES-256-GCM，iv+tag+ciphertext base64）',TEXT,API 密钥密文（引用行存平台密钥副本）；主,101,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+ai_model,is_selected,TINYINT(1),TINYINT(1) NOT NULL DEFAULT 0 COMMENT '使用中（单用户仅一条为 1）',TINYINT,使用中（单用户仅一条为 1）,101,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+ai_model,created_at,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,DATETIME,创建时间,101,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+ai_platform_model,id,BIGINT,BIGINT PRIMARY KEY AUTO_INCREMENT,BIGINT,目录标识,101,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+ai_platform_model,name,VARCHAR(64),VARCHAR(64) NOT NULL COMMENT '展示名称',VARCHAR(64),展示名称,101,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+ai_platform_model,protocol,VARCHAR(16),VARCHAR(16) NOT NULL DEFAULT 'openai' COMMENT '协议：openai 兼容 / anthropic 原生',,,101,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+ai_platform_model,base_url,VARCHAR(200),VARCHAR(200) NOT NULL COMMENT '接口地址',VARCHAR(200),接口地址,101,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+ai_platform_model,model_id,VARCHAR(64),VARCHAR(64) NOT NULL COMMENT '模型 ID（官方模型名）',VARCHAR(64),模型 ID（官方模型名）,101,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+ai_platform_model,api_key_cipher,TEXT,TEXT NOT NULL COMMENT 'API 密钥密文（AES-256-GCM，iv+tag+ciphertext base64）',TEXT,"API 密钥密文（AES-256-GCM,",101,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+ai_platform_model,enabled,TINYINT(1),TINYINT(1) NOT NULL DEFAULT 1 COMMENT '是否启用（停用后用户端即刻隐藏/失效回落）',TINYINT,是否启用（停用后用户端隐藏）,101,类型不同，需适配裁决,仅补代码既有语义注释；结构变更待B/C确认
+ai_platform_model,sort_order,INT,INT NOT NULL DEFAULT 0 COMMENT '排序（小在前）',INT,排序（小在前）,101,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+ai_platform_model,created_at,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,DATETIME,创建时间,101,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+sticker,id,BIGINT,BIGINT AUTO_INCREMENT PRIMARY KEY,BIGINT,贴纸标识,93,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+sticker,user_id,BIGINT,BIGINT NOT NULL,BIGINT,贴纸归属用户,93,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+sticker,name,VARCHAR(64),VARCHAR(64) NOT NULL DEFAULT '' COMMENT '贴纸名（默认菜品/文件名）',,,93,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+sticker,object_key,VARCHAR(255),VARCHAR(255) NOT NULL COMMENT 'MinIO 对象键（透明 PNG）',VARCHAR(255),MinIO 对象键,93,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+sticker,source,TINYINT,TINYINT NOT NULL DEFAULT 0 COMMENT '0 用户上传抠图 / 1 收藏自动抠图',,,93,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+sticker,created_at,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,DATETIME,创建时间,93,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+journal,id,BIGINT,BIGINT AUTO_INCREMENT PRIMARY KEY,BIGINT,手账标识,90,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认
+journal,user_id,BIGINT,BIGINT NOT NULL,,,90,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+journal,title,VARCHAR(64),VARCHAR(64) NOT NULL DEFAULT '' COMMENT '手账标题',,,90,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+journal,date,DATE,DATE NOT NULL COMMENT '手账对应日期',,,90,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+journal,text,TEXT,TEXT NULL COMMENT '正文随笔',,,90,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+journal,bg,TINYINT,TINYINT NOT NULL DEFAULT 0 COMMENT '纸面背景样式 0 米纸网格 / 1 点阵 / 2 牛皮纸 / 3 自定义图片',,,90,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+journal,bg_src,VARCHAR(255),VARCHAR(255) NULL COMMENT 'bg=3 自定义背景图 /img/ 路径',,,90,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+journal,layout,JSON,"JSON NOT NULL COMMENT '画布块数组 [{kind,sticker,x,y,w,rot,text,color,size}]（画布 750x1000）'",,,90,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+journal,cover,VARCHAR(255),VARCHAR(255) NULL COMMENT '封面贴纸对象键（列表缩略）',,,90,字典未匹配同名字段，需适配或人工复核,仅补代码既有语义注释；结构变更待B/C确认
+journal,created_at,DATETIME,DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,DATETIME,创建时间,90,同名同类型；默认值/可空性需查DDL,仅补代码既有语义注释；结构变更待B/C确认

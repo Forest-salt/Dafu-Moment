@@ -1,0 +1,34 @@
+[
+  {
+    "path": "backend/sql/init.sql",
+    "sha256": "3ed74658898fb81c9775c03b275bfcdb610c726171a3876bca6ff441d7ea0bb1"
+  },
+  {
+    "path": "backend/sql/migration/001_existing_column_comments.sql",
+    "sha256": "48369dd69e1726cca3a0d18682747489cf9eca57047a53f30a3af2cae58b1cca"
+  },
+  {
+    "path": "backend/sql/rollback/001_existing_column_comments.sql",
+    "sha256": "5faabb9ffa19bfe6ce089d6992e23da9aa81846b1b7798402cf140cfa458bd0b"
+  },
+  {
+    "path": "backend/sql/inspection/existing_data_checks.sql",
+    "sha256": "4aa22c7ae8b079b3537e1ea675e25cfc0951b914f7f218e6ab60b4671c9216e3"
+  },
+  {
+    "path": "backend/tools/data_audit.py",
+    "sha256": "ad8a00928cb7604adbdc70481c1caa3973d3e48030d9c4e5d41afd28e1c151e3"
+  },
+  {
+    "path": "backend/tools/apply_data_comments.py",
+    "sha256": "b006d1cfdc82b9363695f2f28b0e79479679cd32311292a4aaa654c8b75fc0b7"
+  },
+  {
+    "path": "backend/tools/verify_data_patch.py",
+    "sha256": "1a3cba9e57d95d91ffba46623010671bb3d51e6c97ce140b5ef6feff3d752f6c"
+  },
+  {
+    "path": "docs/data/baseline-columns.json",
+    "sha256": "2c323794199f8cd72a42a9e6a7ca6884532192e09c265202d1525efcf33fd7c1"
+  }
+]

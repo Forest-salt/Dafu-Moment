@@ -1,0 +1,15 @@
+{
+  "estimated_dishes": 37,
+  "represented_shops": 11,
+  "verified_real_unit_prices_added": 0,
+  "existing_rows_overwritten": 0,
+  "price_range": [
+    10,
+    18
+  ],
+  "source_snapshot_sha256": "99f0d368e9a518b4b95a14f38e0f8029bb685ce90a372d92bfdb00cee98e9cc7",
+  "authorization_date": "2026-10-25",
+  "historical_2021_used": false,
+  "verification": "reports/verification.json",
+  "verification_groups": 10
+}

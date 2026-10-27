@@ -1,0 +1,1539 @@
+[
+  {
+    "record_id": "fzu-001",
+    "name": "玫瑰园食惠餐厅",
+    "address": "福州大学生活区三区（一楼）",
+    "scene_category": "食堂",
+    "source_key": "fzu_canteens_2025",
+    "source_url": "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+    "source_published_date": "2025-06-30",
+    "collected_at": "2026-10-24T21:53:17.763366+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "官方历史资料确认名称；当前营业状态、价格和坐标未核验",
+    "coordinate_source_id": "qishan-009",
+    "source_coordinates": [
+      119.18791993,
+      26.05566677
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": null,
+    "source_business_hours": "06:00-19:30",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "fzu-002",
+    "name": "丁香园品膳餐厅",
+    "address": "福州大学生活区一区（一楼）",
+    "scene_category": "食堂",
+    "source_key": "fzu_canteens_2025",
+    "source_url": "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+    "source_published_date": "2025-06-30",
+    "collected_at": "2026-10-24T21:53:17.763366+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "官方历史资料确认名称；当前营业状态、价格和坐标未核验",
+    "coordinate_source_id": "qishan-013",
+    "source_coordinates": [
+      119.18730509,
+      26.05967471
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": null,
+    "source_business_hours": "06:00-23:30",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "fzu-003",
+    "name": "桃李园餐厅",
+    "address": null,
+    "scene_category": "食堂",
+    "source_key": "fzu_canteens_2025",
+    "source_url": "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+    "source_published_date": "2025-06-30",
+    "collected_at": "2026-10-24T21:53:17.763366+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "官方历史资料确认名称；当前营业状态、价格和坐标未核验"
+  },
+  {
+    "record_id": "fzu-004",
+    "name": "佳客来西餐厅",
+    "address": null,
+    "scene_category": "食堂",
+    "source_key": "fzu_canteens_2025",
+    "source_url": "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+    "source_published_date": "2025-06-30",
+    "collected_at": "2026-10-24T21:53:17.763366+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "官方历史资料确认名称；当前营业状态、价格和坐标未核验"
+  },
+  {
+    "record_id": "fzu-005",
+    "name": "海棠园京元餐厅",
+    "address": null,
+    "scene_category": "食堂",
+    "source_key": "fzu_canteens_2025",
+    "source_url": "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+    "source_published_date": "2025-06-30",
+    "collected_at": "2026-10-24T21:53:17.763366+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "官方历史资料确认名称；当前营业状态、价格和坐标未核验"
+  },
+  {
+    "record_id": "fzu-006",
+    "name": "丹桂园朝阳餐厅",
+    "address": "福州大学生活区一区（二楼）",
+    "scene_category": "食堂",
+    "source_key": "fzu_canteens_2025",
+    "source_url": "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+    "source_published_date": "2025-06-30",
+    "collected_at": "2026-10-24T21:53:17.763366+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "官方历史资料确认名称；当前营业状态、价格和坐标未核验",
+    "coordinate_source_id": "qishan-014",
+    "source_coordinates": [
+      119.18740324,
+      26.05949977
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": null,
+    "source_business_hours": "09:00-19:30",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "fzu-007",
+    "name": "茉莉园聚誉餐厅",
+    "address": "福州大学生活区一区（二楼）",
+    "scene_category": "食堂",
+    "source_key": "fzu_canteens_2025",
+    "source_url": "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+    "source_published_date": "2025-06-30",
+    "collected_at": "2026-10-24T21:53:17.763366+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "官方历史资料确认名称；当前营业状态、价格和坐标未核验",
+    "coordinate_source_id": "qishan-016",
+    "source_coordinates": [
+      119.18790532,
+      26.05955123
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": null,
+    "source_business_hours": "06:00-19:30",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "fzu-008",
+    "name": "百合园立品餐厅",
+    "address": "福州大学生活区一区（三楼）",
+    "scene_category": "食堂",
+    "source_key": "fzu_canteens_2025",
+    "source_url": "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+    "source_published_date": "2025-06-30",
+    "collected_at": "2026-10-24T21:53:17.763366+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "官方历史资料确认名称；当前营业状态、价格和坐标未核验",
+    "coordinate_source_id": "qishan-015",
+    "source_coordinates": [
+      119.18720674,
+      26.05949342
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": null,
+    "source_business_hours": "09:00-19:30",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "fzu-009",
+    "name": "紫竹园到口餐厅",
+    "address": null,
+    "scene_category": "食堂",
+    "source_key": "fzu_canteens_2025",
+    "source_url": "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+    "source_published_date": "2025-06-30",
+    "collected_at": "2026-10-24T21:53:17.763366+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "官方历史资料确认名称；当前营业状态、价格和坐标未核验"
+  },
+  {
+    "record_id": "fzu-010",
+    "name": "紫荆园捷祥餐厅",
+    "address": "福州大学生活区三区（一楼）",
+    "scene_category": "食堂",
+    "source_key": "fzu_canteens_2025",
+    "source_url": "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+    "source_published_date": "2025-06-30",
+    "collected_at": "2026-10-24T21:53:17.763366+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "官方历史资料确认名称；当前营业状态、价格和坐标未核验",
+    "coordinate_source_id": "qishan-011",
+    "source_coordinates": [
+      119.18721993,
+      26.05569677
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": null,
+    "source_business_hours": "06:00-19:30",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "fzu-011",
+    "name": "牡丹园清谷餐厅",
+    "address": "福州大学生活区三区（二楼）",
+    "scene_category": "食堂",
+    "source_key": "fzu_canteens_2025",
+    "source_url": "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+    "source_published_date": "2025-06-30",
+    "collected_at": "2026-10-24T21:53:17.763366+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "官方历史资料确认名称；当前营业状态、价格和坐标未核验",
+    "coordinate_source_id": "qishan-012",
+    "source_coordinates": [
+      119.18721993,
+      26.05609677
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": null,
+    "source_business_hours": "09:00-23:30",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "fzu-012",
+    "name": "芙蓉园兴安餐厅",
+    "address": "福州大学生活区三区（二楼）",
+    "scene_category": "食堂",
+    "source_key": "fzu_canteens_2025",
+    "source_url": "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+    "source_published_date": "2025-06-30",
+    "collected_at": "2026-10-24T21:53:17.763366+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "官方历史资料确认名称；当前营业状态、价格和坐标未核验",
+    "coordinate_source_id": "qishan-010",
+    "source_coordinates": [
+      119.18791993,
+      26.05606677
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": null,
+    "source_business_hours": "09:00-19:30",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://hqc.fzu.edu.cn/info/1032/3114.htm",
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "mcd-013",
+    "name": "福州麦当劳国宾大道DT餐厅",
+    "address": "福建省福州市闽侯县上街镇国宾大道233号博仕家园B区的2-2#的101-104商业、129-132复式商业的商铺",
+    "scene_category": "其他",
+    "source_key": "mcd_official_stores",
+    "source_url": "https://www.mcdonalds.com.cn/page/giftcard-available-stores",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T21:53:17.763366+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "品牌官方名录确认名称和地址；周边候选，未核验到校配送和距离"
+  },
+  {
+    "record_id": "mcd-014",
+    "name": "福州麦当劳上街镇国宾大道餐厅",
+    "address": "福建省福州市闽侯县上街镇国宾大道268号永辉城市生活广场16#楼",
+    "scene_category": "其他",
+    "source_key": "mcd_official_stores",
+    "source_url": "https://www.mcdonalds.com.cn/page/giftcard-available-stores",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T21:53:17.763366+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "品牌官方名录确认名称和地址；周边候选，未核验到校配送和距离"
+  },
+  {
+    "record_id": "mcd-015",
+    "name": "福州麦当劳闽侯上街国宾大道(梅园酒店)餐厅",
+    "address": "福建省福州市闽侯县上街镇国宾大道350号梅园上街广场1-1#楼一层1号商铺",
+    "scene_category": "其他",
+    "source_key": "mcd_official_stores",
+    "source_url": "https://www.mcdonalds.com.cn/page/giftcard-available-stores",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T21:53:17.763366+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "品牌官方名录确认名称和地址；周边候选，未核验到校配送和距离"
+  },
+  {
+    "record_id": "qishan-001",
+    "name": "盛茂源东北饺子馆",
+    "address": "岐安福大学生街A1区学府北路10-27号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-001",
+    "source_coordinates": [
+      119.18755118,
+      26.06281811
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "34",
+    "source_business_hours": "10:00-13:30,16:00-21:30",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-002",
+    "name": "夜贰两东北串吧",
+    "address": "岐安福大学生街C2区溪源宫路3-12号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-002",
+    "source_coordinates": [
+      119.18690437,
+      26.06287977
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "68",
+    "source_business_hours": "16:00-次日02:00",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-003",
+    "name": "文博家锅盔",
+    "address": "福州大学（旗山校区）西1门附近",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-003",
+    "source_coordinates": [
+      119.18743904,
+      26.06216911
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "6",
+    "source_business_hours": "17:30-00:00",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-004",
+    "name": "猪师弟空气年糕",
+    "address": "岐安福大学生街B1区",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-004",
+    "source_coordinates": [
+      119.18709511,
+      26.06254387
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "10",
+    "source_business_hours": "暂无营业时间，一般晚上营业",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-005",
+    "name": "陈记片皮鸭",
+    "address": "岐安福大学生街B3区学府北路10-192号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-005",
+    "source_coordinates": [
+      119.18723538,
+      26.06248596
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "10",
+    "source_business_hours": "10:00-次日01:00",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-006",
+    "name": "壹品豆花",
+    "address": "岐安福大学生街B1区",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-006",
+    "source_coordinates": [
+      119.18714616,
+      26.06263096
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "12",
+    "source_business_hours": "暂无营业时间",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-007",
+    "name": "便宜坊（原光阴的故事）",
+    "address": "岐安福大学生街C1区学府北路10-180号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-007",
+    "source_coordinates": [
+      119.18626585,
+      26.06194088
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "69",
+    "source_business_hours": "10:00-22:00",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-008",
+    "name": "临榆炸鸡腿（学生街店）",
+    "address": "岐安福大学生街C1区学府北路10-177号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-008",
+    "source_coordinates": [
+      119.18657404,
+      26.06252971
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "18",
+    "source_business_hours": "10:00-22:00",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-017",
+    "name": "台湾锅贴",
+    "address": "福州大学（旗山校区）西1门附近",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-017",
+    "source_coordinates": [
+      119.18814969,
+      26.06101564
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "10",
+    "source_business_hours": "11:30-19:00",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-018",
+    "name": "重庆小面",
+    "address": "岐安福大学生街B2区学府北路10号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-018",
+    "source_coordinates": [
+      119.18757736,
+      26.06203751
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "10",
+    "source_business_hours": "暂无",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-019",
+    "name": "刘记肉夹馍",
+    "address": "岐安福大学生街A2区B8-1学府北路10号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-019",
+    "source_coordinates": [
+      119.18722359,
+      26.06196202
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "8",
+    "source_business_hours": "10:00-13:00,16:00-22:30",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-020",
+    "name": "可可烘焙",
+    "address": "岐安福大学生街学府北路10-110号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-020",
+    "source_coordinates": [
+      119.18725371,
+      26.06216034
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "13",
+    "source_business_hours": "08:00--23:30",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-021",
+    "name": "广式养生鸡",
+    "address": "岐安福大学生街A1区学府北路10-22号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-021",
+    "source_coordinates": [
+      119.18758019,
+      26.06272811
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "62",
+    "source_business_hours": "10:00-次日01:00",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-022",
+    "name": "莆田卤面·天九湾炝肉·山里炝粉",
+    "address": "岐安福大学生街B1区08店面学府北路10-92号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-022",
+    "source_coordinates": [
+      119.18703415,
+      26.06191484
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "15",
+    "source_business_hours": "10:00-13:30,16:00-22:00",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-023",
+    "name": "栗栗烘焙-栗酥饼（福大店）",
+    "address": "岐安福大学生街B1区学府北路10-106号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-023",
+    "source_coordinates": [
+      119.18645107,
+      26.06174708
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "14",
+    "source_business_hours": "10:30-21:30",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-024",
+    "name": "江一福·按时吃饭·啫啫煲",
+    "address": "岐安福大学生街学府北路10-127号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-024",
+    "source_coordinates": [
+      119.18655619,
+      26.06193837
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "22",
+    "source_business_hours": "10:00-22:00",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-025",
+    "name": "周麻婆·新川式家常菜",
+    "address": "岐安福大学生街学府北路10-193号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-025",
+    "source_coordinates": [
+      119.18600202,
+      26.06232088
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "41",
+    "source_business_hours": "11:00-14:00,17:00-21:00",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-026",
+    "name": "鲜榨果汁·现炒板栗",
+    "address": "岐安福大学生街B1区学府北路10-228号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-026",
+    "source_coordinates": [
+      119.18703511,
+      26.06256387
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "11",
+    "source_business_hours": "11:00-00:00",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-027",
+    "name": "十里后院·快递夜市",
+    "address": "岐安福大学生街B1区学府北路10-228号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-027",
+    "source_coordinates": [
+      119.1861303,
+      26.0619678
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "11",
+    "source_business_hours": "12:00-21:00",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-028",
+    "name": "洪濑鸡爪",
+    "address": "岐安福大学生街学府北路10-73号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-028",
+    "source_coordinates": [
+      119.18721654,
+      26.06279672
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "15",
+    "source_business_hours": "10:00-21:00",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-029",
+    "name": "云南铜锅牛羊肉米线",
+    "address": "岐安福大学生街学府北路10-235号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-029",
+    "source_coordinates": [
+      119.18700511,
+      26.06250387
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "17",
+    "source_business_hours": "09:00-23:30",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-030",
+    "name": "达叔肉夹馍·烤冷面",
+    "address": "岐安福大学生街B1区学府北路10号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-030",
+    "source_coordinates": [
+      119.18709064,
+      26.06259742
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "13",
+    "source_business_hours": "16:00-00:30",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-031",
+    "name": "卤百味",
+    "address": "岐安福大学生街学府北路10号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-031",
+    "source_coordinates": [
+      119.18695905,
+      26.06248518
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "12",
+    "source_business_hours": null,
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-032",
+    "name": "成都纸包鱼烧烤大排档",
+    "address": "岐安福大学生街A1区学府北路10号19店面",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-032",
+    "source_coordinates": [
+      119.18617827,
+      26.06254824
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "71",
+    "source_business_hours": "16:00-次日02:30",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-033",
+    "name": "桥头排骨",
+    "address": "岐安福大学生街学府北路10-231号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-033",
+    "source_coordinates": [
+      119.18705511,
+      26.06252387
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "19",
+    "source_business_hours": "11:30-13:30,15:30-23:50",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-034",
+    "name": "北方饭店",
+    "address": "明德路6号万科金域蓝湾1栋115商铺",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-034",
+    "source_coordinates": [
+      119.19473744,
+      26.04743159
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "40",
+    "source_business_hours": "10:30-21:00",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-035",
+    "name": "川册·川味小馆",
+    "address": "中海寰宇天下高新大道1-41号",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-035",
+    "source_coordinates": [
+      119.20770486,
+      26.05218742
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "60",
+    "source_business_hours": "11:00-14:00,17:00-22:30",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-036",
+    "name": "李夏记牛腩煲（原广式牛杂）",
+    "address": "高新大道1-1号中海寰宇天下42号楼1层125商业",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-036",
+    "source_coordinates": [
+      119.20973393,
+      26.05358243
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "18",
+    "source_business_hours": "09:30-21:00",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-037",
+    "name": "焦焦牧场·鲜牛奶炸鸡",
+    "address": "国宾大道179-2号",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-037",
+    "source_coordinates": [
+      119.19321294,
+      26.07158708
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "35",
+    "source_business_hours": "10:55-23:59",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-038",
+    "name": "116炭火",
+    "address": "国宾大道266-5号家园酒店旁",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-038",
+    "source_coordinates": [
+      119.19727016,
+      26.07143211
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "90",
+    "source_business_hours": "16:00-次日02:00",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-039",
+    "name": "fufu牛奶冰",
+    "address": "国宾大道233号博仕后时代购物广场1楼",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-039",
+    "source_coordinates": [
+      119.19843566,
+      26.07050742
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "18",
+    "source_business_hours": "11:30-00:00",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-040",
+    "name": "傻师傅台湾厨房",
+    "address": "源通东路59-56号",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-040",
+    "source_coordinates": [
+      119.18918264,
+      26.07554207
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "20",
+    "source_business_hours": "10:30-21:00",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-041",
+    "name": "新疆石榴花美食馆",
+    "address": "源通东路59-54号",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-041",
+    "source_coordinates": [
+      119.18928264,
+      26.07564207
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "20",
+    "source_business_hours": "09:00-次日04:00",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-042",
+    "name": "禾西Restaurant",
+    "address": "国宾大道350号梅园上街广场4号楼元翔快线旁（近上街地铁站A出口）",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-042",
+    "source_coordinates": [
+      119.18381188,
+      26.07927636
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "61",
+    "source_business_hours": "12:00-23:00",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-043",
+    "name": "大福的烧鸟·居酒屋",
+    "address": "源通东路196号理想城二期7号楼1层113",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-043",
+    "source_coordinates": [
+      119.19342095,
+      26.08202209
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "62",
+    "source_business_hours": "12:00-23:00",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-044",
+    "name": "有饭料理店",
+    "address": "岐安福大学生街学府北路10-72号",
+    "scene_category": "学生街",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-044",
+    "source_coordinates": [
+      119.18726161,
+      26.06271914
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "30",
+    "source_business_hours": "11:30-14:00,16:30-22:00",
+    "source_says_takeaway": true,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-045",
+    "name": "唐小厨东北菜",
+    "address": "上街镇源江路156号-10",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-045",
+    "source_coordinates": [
+      119.1794373,
+      26.06654995
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "50",
+    "source_business_hours": "10:30-14:00,17:00-23:00",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-046",
+    "name": "福大阿毛烧烤",
+    "address": "溪源宫路106-4号",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-046",
+    "source_coordinates": [
+      119.17480157,
+      26.06297961
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "66",
+    "source_business_hours": "17:00-次日05:00",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-047",
+    "name": "周家粥铺",
+    "address": "岐安花园一期东北2门南120米",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-047",
+    "source_coordinates": [
+      119.18389504,
+      26.04990089
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "20",
+    "source_business_hours": "08:00-21:00",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-048",
+    "name": "黔味烤鱼",
+    "address": "岐安1号二期",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-048",
+    "source_coordinates": [
+      119.18660283,
+      26.04786367
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "46",
+    "source_business_hours": "10:00-次日00:30",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-049",
+    "name": "邱阳破店",
+    "address": "红峰村新上街邱阳9-1号",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-049",
+    "source_coordinates": [
+      119.18411702,
+      26.08627407
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "50",
+    "source_business_hours": "10:00-13:30,17:00-20:30",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-050",
+    "name": "山东水饺",
+    "address": "侯官路1-57号",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-050",
+    "source_coordinates": [
+      119.20484739,
+      26.07518735
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "18",
+    "source_business_hours": "10:00-22:00",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-051",
+    "name": "何记河南正宗水煎包胡辣汤",
+    "address": "国宾大道上街余盛小学南侧",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-051",
+    "source_coordinates": [
+      119.20241373,
+      26.07279887
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "10",
+    "source_business_hours": "06:30-19:30",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-052",
+    "name": "KEFI来乐食堂",
+    "address": "浦兴路18号",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-052",
+    "source_coordinates": [
+      119.20140778,
+      26.06391828
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "35",
+    "source_business_hours": "11:00-13:30,17:00-20:30,周一休息",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  },
+  {
+    "record_id": "qishan-053",
+    "name": "依云煎包店",
+    "address": "新上街与新尚路交叉口东50米（新华盛超市对面）",
+    "scene_category": "其他",
+    "source_key": "ffm_qishan",
+    "source_url": "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson",
+    "source_published_date": null,
+    "collected_at": "2026-10-24T23:35:57.591628+08:00",
+    "business_status_verified": false,
+    "delivery_to_fzu_verified": false,
+    "coordinates_verified": false,
+    "note": "公开探店地图记录；不是当日到店或平台配送确认",
+    "coordinate_source_id": "qishan-053",
+    "source_coordinates": [
+      119.18897556,
+      26.08269978
+    ],
+    "gcj02": null,
+    "coordinate_basis": "地图暂缓：仅留存原始坐标，不自动生成地图SQL",
+    "reference_average_spend": "16",
+    "source_business_hours": "06:30-13:30",
+    "source_says_takeaway": false,
+    "evidence_urls": [
+      "https://raw.githubusercontent.com/155TuT/FFM-FzuFoodMap/9d9680b6a4050fff132eb551c79f7818c8e9e928/fzu-food-map/public/data/fuzhou/qishan.geojson"
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  <defs>
+    <pattern id="d" width="18" height="18" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.6" fill="rgba(61,47,30,.08)"/>
+      <circle cx="12" cy="12" r="1.6" fill="rgba(61,47,30,.05)"/>
+    </pattern>
+  </defs>
+  <rect width="320" height="180" fill="#ddeef8"/>
+  <rect width="320" height="180" fill="url(#d)"/>
+  <circle cx="284" cy="128" r="7" fill="none" stroke="#ff6633" stroke-width="3" opacity=".45"/>
+  <rect x="32" y="38" width="14" height="14" rx="3" transform="rotate(-14 39 45)" fill="none" stroke="#ff6633" stroke-width="3" opacity=".45"/>
+  <g stroke="#3d2f1e" stroke-width="4">
+    <path d="M120 116c-16-12-18-38-2-52 17-15 45-13 57 3 11 15 6 36-9 47-15 10-32 11-46 2z" fill="#c98850"/>
+    <path d="M168 120l24 24" stroke="#f5dcc0" stroke-width="11" stroke-linecap="round"/>
+    <circle cx="198" cy="150" r="9" fill="#fffdf4"/>
+    <circle cx="184" cy="158" r="9" fill="#fffdf4"/>
+  </g>
+  <path d="M138 74c4-6 12-8 18-4" fill="none" stroke="#fffdf4" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+</svg>

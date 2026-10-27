@@ -1,0 +1,30 @@
+# 依赖目录
+node_modules/
+
+# 构建产物
+dist/
+*.log
+
+# Python 缓存
+__pycache__/
+*.pyc
+
+# 环境变量（含真实密钥，仅本地保留；参考 .env.example 配置）
+.env
+.env.local
+.env.*.local
+
+# 空壳目录（无代码文件，不上传）
+admin/
+client/
+
+# 系统与编辑器文件
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# 采集留档的公开网页/地图前端，仅保留本地；提交结构化事实、来源与许可。
+data/db3/collection/round2/*.html
+data/db3/collection/round2/*.html.txt
+data/db3/collection/round2/fzu-map-*.js

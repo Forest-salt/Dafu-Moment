@@ -1,0 +1,59 @@
+{
+  "schema": "3.0",
+  "production_accessed": false,
+  "tests": [
+    {
+      "check": "fresh_schema_and_repeat_78_106_545",
+      "passed": true
+    },
+    {
+      "check": "nine_digit_synthetic_identity_password_hash_unverified",
+      "passed": true
+    },
+    {
+      "check": "phone_encrypted_at_rest_salted_lookup",
+      "passed": true
+    },
+    {
+      "check": "checkin_unique_concurrent_ownership_rollback",
+      "passed": true
+    },
+    {
+      "check": "journal_checkin_text_image_privacy_no_canvas",
+      "passed": true
+    },
+    {
+      "check": "dietary_profile_normalized_repeat_validation",
+      "passed": true
+    },
+    {
+      "check": "review_normalized_dimensions_pending_excluded_aggregate",
+      "passed": true
+    },
+    {
+      "check": "checkin_delete_cascades_journal_assets_progress_keeps_history",
+      "passed": true
+    },
+    {
+      "check": "pet_feed_balance_concurrent_limit_atomic",
+      "passed": true
+    },
+    {
+      "check": "daily_task_evidence_concurrent_once_no_reclaim",
+      "passed": true
+    },
+    {
+      "check": "favorite_polymorphic_codes_repeat_softdelete_readd",
+      "passed": true
+    },
+    {
+      "check": "http_canonical_routes_auth_roles_and_captcha_fail_closed",
+      "passed": true
+    },
+    {
+      "check": "schema_drift_refused_without_repair_or_data_change",
+      "passed": true
+    }
+  ],
+  "verified_on": "2026-10-25"
+}

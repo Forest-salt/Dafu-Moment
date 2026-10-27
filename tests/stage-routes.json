@@ -1,0 +1,32 @@
+{
+    "D2": {
+        "title": "开工日：K0 + 打卡链路",
+        "keep": ["/", "/login", "/checkin"],
+        "screenshots": ["/", "/checkin"]
+    },
+    "D3": {
+        "title": "打卡收口 + 成就 + 足迹",
+        "keep": ["/", "/login", "/checkin", "/footprint", "/achievements", "/journal/:id", "/journal/edit", "/journal/edit/:id"],
+        "screenshots": ["/checkin", "/footprint", "/achievements"]
+    },
+    "D4": {
+        "title": "宠物链路 + 种子数据",
+        "keep": ["/", "/login", "/checkin", "/footprint", "/achievements", "/journal/:id", "/journal/edit", "/journal/edit/:id", "/pet", "/pet-community"],
+        "screenshots": ["/pet", "/pet-community"]
+    },
+    "D5": {
+        "title": "K1 判定：计划 + 档案",
+        "keep": ["/", "/login", "/checkin", "/footprint", "/achievements", "/journal/:id", "/journal/edit", "/journal/edit/:id", "/pet", "/pet-community", "/ai/profile", "/ai/plan"],
+        "screenshots": ["/ai/profile", "/ai/plan"]
+    },
+    "D6": {
+        "title": "冻结日：我的 + 设置 + 任务",
+        "keep": ["/", "/login", "/checkin", "/footprint", "/achievements", "/journal/:id", "/journal/edit", "/journal/edit/:id", "/pet", "/pet-community", "/ai/profile", "/ai/plan", "/me", "/settings", "/tasks", "/report", "/cobuild"],
+        "screenshots": ["/me", "/settings", "/tasks", "/report", "/cobuild"]
+    },
+    "D7": {
+        "title": "交付日：管理端 + 全量",
+        "keep": ["*"],
+        "screenshots": ["/admin/dashboard"]
+    }
+}

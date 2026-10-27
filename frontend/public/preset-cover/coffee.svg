@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  <defs>
+    <pattern id="d" width="18" height="18" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.6" fill="rgba(61,47,30,.08)"/>
+      <circle cx="12" cy="12" r="1.6" fill="rgba(61,47,30,.05)"/>
+    </pattern>
+  </defs>
+  <rect width="320" height="180" fill="#f1e8dc"/>
+  <rect width="320" height="180" fill="url(#d)"/>
+  <circle cx="36" cy="38" r="7" fill="none" stroke="#ff6633" stroke-width="3" opacity=".45"/>
+  <rect x="270" y="126" width="14" height="14" rx="3" transform="rotate(14 277 133)" fill="none" stroke="#ff6633" stroke-width="3" opacity=".45"/>
+  <path d="M140 42c-5-7 5-11 0-18M166 40c-5-8 5-12 0-19" fill="none" stroke="#bfa98a" stroke-width="4" stroke-linecap="round"/>
+  <ellipse cx="160" cy="136" rx="72" ry="10" fill="#fffdf4" stroke="#3d2f1e" stroke-width="3"/>
+  <path d="M118 74h84c0 36-19 54-42 54s-42-18-42-54z" fill="#fffdf4" stroke="#3d2f1e" stroke-width="4"/>
+  <ellipse cx="160" cy="78" rx="40" ry="7" fill="#8a5a34" stroke="#3d2f1e" stroke-width="3"/>
+  <path d="M160 82c-2-4-9-3-9 2 0 4 6 7 9 9 3-2 9-5 9-9 0-5-7-6-9-2z" fill="#fffdf4"/>
+  <path d="M202 86c17-3 24 8 20 19-3 9-13 11-20 9" fill="none" stroke="#3d2f1e" stroke-width="4"/>
+</svg>

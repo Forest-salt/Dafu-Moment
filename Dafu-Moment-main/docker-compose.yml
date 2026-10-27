@@ -1,0 +1,126 @@
+# DAFU MOMENT（大福食刻）· 六容器编排（mysql / redis / minio / matting / backend / frontend），对外端口 8095
+# 目录名含中文无法推导项目名，显式固定（容器/卷前缀与品牌技术标识一致）
+name: dafu
+services:
+    mysql:
+        image: mysql:8.0
+        container_name: dafu-mysql
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: dafu_root_2026
+            MYSQL_DATABASE: dafu
+            TZ: Asia/Shanghai
+        command: --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+        volumes:
+            - mysql-data:/var/lib/mysql
+            - ./backend/sql:/docker-entrypoint-initdb.d:ro
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pdafu_root_2026"]
+            interval: 5s
+            timeout: 5s
+            retries: 20
+
+    redis:
+        image: redis:7-alpine
+        container_name: dafu-redis
+        restart: unless-stopped
+        command: redis-server --appendonly no
+        healthcheck:
+            test: ["CMD", "redis-cli", "ping"]
+            interval: 5s
+            timeout: 3s
+            retries: 20
+
+    minio:
+        image: minio/minio:latest
+        container_name: dafu-minio
+        restart: unless-stopped
+        command: server /data --console-address ":9001"
+        environment:
+            MINIO_ROOT_USER: dafu-minio
+            MINIO_ROOT_PASSWORD: dafu-minio-2026
+        volumes:
+            - minio-data:/data
+        healthcheck:
+            test: ["CMD", "wget", "-qO-", "http://localhost:9000/minio/health/live"]
+            interval: 5s
+            timeout: 5s
+            retries: 20
+
+    matting:
+        build: ./matting
+        image: dafu-matting
+        container_name: dafu-matting
+        restart: unless-stopped
+        environment:
+            TZ: Asia/Shanghai
+        volumes:
+            # 宿主 rembg 模型缓存直挂（u2net ~170MB，免容器内重复下载，秒级就绪）
+            - ${USERPROFILE}/.u2net:/models
+        healthcheck:
+            test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://localhost:8000/health', timeout=3)"]
+            interval: 10s
+            timeout: 6s
+            retries: 30
+            start_period: 15s
+
+    backend:
+        build: ./backend
+        image: dafu-backend
+        container_name: dafu-backend
+        restart: unless-stopped
+        environment:
+            PORT: "3000"
+            # 自动抠图微服务（rembg U2Net）：compose 内 matting 容器（matting/main.py）
+            MATTING_URL: http://matting:8000
+            DB_HOST: mysql
+            DB_PORT: "3306"
+            DB_USER: root
+            DB_PASSWORD: dafu_root_2026
+            DB_NAME: dafu
+            REDIS_HOST: redis
+            REDIS_PORT: "6379"
+            MINIO_HOST: minio
+            MINIO_PORT: "9000"
+            MINIO_USER: dafu-minio
+            MINIO_PASSWORD: dafu-minio-2026
+            MINIO_BUCKET: dafu-images
+            JWT_SECRET: dafu-jwt-secret-2026
+            # 调试通道：DEBUG=true 时验证码接口附带明文 debugCode（默认关闭；走查/联调时以
+            # PowerShell `$env:DEBUG='true'` 后 `docker compose up -d backend` 显式开启，生产绝不开启）
+            DEBUG: ${DEBUG:-false}
+            # AI 助手平台默认供应商透传（OpenAI 兼容协议，留空时仅用户自配可用）
+            AI_BASE_URL: ${AI_BASE_URL:-}
+            AI_API_KEY: ${AI_API_KEY:-}
+            AI_MODEL: ${AI_MODEL:-}
+            # 福大 CAS 双模式（r51）：两项均配置 → 真实 CAS 3.0（校方注册的 service 回调白名单）；
+            # 留空 → 演示桩模式（学号 + 口令模拟校验）
+            FZU_CAS_BASE_URL: ${FZU_CAS_BASE_URL:-}
+            FZU_CAS_SERVICE: ${FZU_CAS_SERVICE:-}
+            FZU_CAS_VALIDATE_PATH: ${FZU_CAS_VALIDATE_PATH:-/serviceValidate}
+            TZ: Asia/Shanghai
+        depends_on:
+            mysql:
+                condition: service_healthy
+            redis:
+                condition: service_healthy
+            minio:
+                condition: service_healthy
+            matting:
+                condition: service_healthy
+        ports:
+            - "3000:3000"
+
+    frontend:
+        build: ./frontend
+        image: dafu-frontend
+        container_name: dafu-frontend
+        restart: unless-stopped
+        depends_on:
+            - backend
+        ports:
+            - "8095:80"
+
+volumes:
+    mysql-data:
+    minio-data:

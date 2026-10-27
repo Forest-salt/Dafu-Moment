@@ -1,0 +1,42 @@
+[
+  {
+    "file": "deduplication.json",
+    "sha256": "1ed511c3d893bd46fa1ced1d876685dcb1a21e04c1d0b495507e78038d698224"
+  },
+  {
+    "file": "ffm-fzu-food-map__README.md",
+    "sha256": "8a87adec8ca1c6ce6cd6ebaf606983c0b41a8129560f910af4a3f8c966d5af81"
+  },
+  {
+    "file": "FFM-LICENSE.md",
+    "sha256": "9a632ac9c8de805a9b00c800239cb3f2da1f59728e63b4b66b13ec2994e4a8df"
+  },
+  {
+    "file": "FFM-LICENSE.txt",
+    "sha256": "9a632ac9c8de805a9b00c800239cb3f2da1f59728e63b4b66b13ec2994e4a8df"
+  },
+  {
+    "file": "ffm-qishan.geojson",
+    "sha256": "99f0d368e9a518b4b95a14f38e0f8029bb685ce90a372d92bfdb00cee98e9cc7"
+  },
+  {
+    "file": "ffm-README.md",
+    "sha256": "46a16e958162e629d26db4ec02f02228aca9b31dbecb78ac67a7a8423b65c389"
+  },
+  {
+    "file": "normalized-places.csv",
+    "sha256": "d964312488b7e4005d17fba2f3846e092135d4aaeb077c6ebc5582a54ba87bef"
+  },
+  {
+    "file": "README.md",
+    "sha256": "263245b1b2ddd87c778c1febc20ac519cd26d68fffcbd62a94c9018a8707abe3"
+  },
+  {
+    "file": "round1-places.json",
+    "sha256": "dbfc45d4c201381ff86dac8c411b2d3522c59dafcd05f4c6a64b2238ef4f724e"
+  },
+  {
+    "file": "summary.json",
+    "sha256": "f08986cc2e8f7d468e4b9bbff8ae7a64fe4c4732eb69258bcc3f90570c32deb1"
+  }
+]
