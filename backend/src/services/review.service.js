@@ -184,10 +184,10 @@ async function vote(reviewId, delta, field) {
 }
 
 /**
- * 评价列表（hot = Laplace 平滑排序；匿名脱敏）
+ * 评价列表（hot = Laplace 平滑排序；dim:<key> = 该维度分项分降序；匿名脱敏）
  * @param {number} subjectType
  * @param {number} subjectId
- * @param {string} sort - hot|new
+ * @param {string} sort - hot | new | dim:<key>（T-11/AC05；key 须在 review_dimension 配置内，否则 422）
  * @param {number} page
  * @param {number} pageSize
  * @param {number|null} viewerId - 当前登录人（计算 liked 已点赞标记；null 表示未登录）
@@ -195,9 +195,20 @@ async function vote(reviewId, delta, field) {
  */
 async function list_reviews(subjectType, subjectId, sort = 'new', page = 1, pageSize = 20, viewerId = null) {
     const offset = (page - 1) * pageSize;
-    const order = sort === 'hot'
-        ? '(up_count + 1) / (up_count + down_count + 2) DESC, created_at DESC'
-        : 'created_at DESC';
+    let order;
+    let dimPath = null;
+    if (typeof sort === 'string' && sort.startsWith('dim:')) {
+        // T-11（AC05）：按指定维度分项分降序；维度键白名单校验后再拼 JSON 路径，缺该维度的评价（NULL）自然沉底
+        const dimKey = sort.slice(4);
+        const dims = await dimension.all_dimensions();
+        if (!dims.some((d) => d.key === dimKey)) throw err.invalid(`未知排序维度：${dimKey}`);
+        dimPath = `$.${dimKey}`;
+        order = 'CAST(JSON_UNQUOTE(JSON_EXTRACT(r.dimension_scores, ?)) AS DECIMAL(3, 1)) DESC, created_at DESC';
+    } else {
+        order = sort === 'hot'
+            ? '(up_count + 1) / (up_count + down_count + 2) DESC, created_at DESC'
+            : 'created_at DESC';
+    }
     // liked：当前用户是否已赞（未登录恒 0；EXISTS 子查询走 uk_user_review 唯一索引）
     const likedSelect = viewerId
         ? '(SELECT COUNT(*) FROM review_like rl WHERE rl.review_id = r.id AND rl.user_id = ?) AS liked'
@@ -224,7 +235,7 @@ async function list_reviews(subjectType, subjectId, sort = 'new', page = 1, page
          WHERE ${scoped ? 'r.subject_type = ? AND r.subject_id = ? AND ' : ''}r.status IN (0, 2)
          ORDER BY ${order}
          LIMIT ? OFFSET ?`,
-        [...params, ...(scoped ? [subjectType, subjectId] : []), pageSize, offset]
+        [...params, ...(scoped ? [subjectType, subjectId] : []), ...(dimPath ? [dimPath] : []), pageSize, offset]
     );
     return {
         list: list.map(map_review_row),
