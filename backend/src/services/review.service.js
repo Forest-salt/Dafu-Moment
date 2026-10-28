@@ -184,10 +184,10 @@ async function vote(reviewId, delta, field) {
 }
 
 /**
- * 评价列表（hot = Laplace 平滑排序；匿名脱敏）
+ * 评价列表（hot = Laplace 平滑排序；dim:<key> = 按适用维度得分排序；匿名脱敏）
  * @param {number} subjectType
  * @param {number} subjectId
- * @param {string} sort - hot|new
+ * @param {string} sort - hot|new|dim:<dimension_key>
  * @param {number} page
  * @param {number} pageSize
  * @param {number|null} viewerId - 当前登录人（计算 liked 已点赞标记；null 表示未登录）
@@ -195,17 +195,28 @@ async function vote(reviewId, delta, field) {
  */
 async function list_reviews(subjectType, subjectId, sort = 'new', page = 1, pageSize = 20, viewerId = null) {
     const offset = (page - 1) * pageSize;
-    const order = sort === 'hot'
-        ? '(up_count + 1) / (up_count + down_count + 2) DESC, created_at DESC'
-        : 'created_at DESC';
+    // 作用域：传 subject_id → 按点评对象过滤；不传 → 全站最新流（首页气泡 / 点评圈共用）
+    const scoped = subjectId !== null && subjectId !== undefined
+        && Number.isInteger(Number(subjectId)) && Number(subjectId) > 0;
+    // 排序表达式：维度排序仅在对象作用域内生效，且维度必须适用于该对象的点位类型
+    let order = 'created_at DESC';
+    let dimPath = null;
+    if (typeof sort === 'string' && sort.startsWith('dim:')) {
+        const key = sort.slice(4);
+        if (!scoped) throw err.invalid('按维度排序需指定点评对象');
+        const canteenType = await assert_subject_exists(Number(subjectType), Number(subjectId));
+        const dims = await dimension.dims_for_type(canteenType);
+        if (!dims.some((d) => d.key === key)) throw err.invalid('该维度不适用于当前点评对象');
+        order = 'CAST(JSON_UNQUOTE(JSON_EXTRACT(r.dimension_scores, ?)) AS DECIMAL(3,1)) DESC, r.created_at DESC';
+        dimPath = `$.${key}`;
+    } else if (sort === 'hot') {
+        order = '(up_count + 1) / (up_count + down_count + 2) DESC, created_at DESC';
+    }
     // liked：当前用户是否已赞（未登录恒 0；EXISTS 子查询走 uk_user_review 唯一索引）
     const likedSelect = viewerId
         ? '(SELECT COUNT(*) FROM review_like rl WHERE rl.review_id = r.id AND rl.user_id = ?) AS liked'
         : '0 AS liked';
     const params = viewerId ? [viewerId] : [];
-    // 作用域：传 subject_id → 按点评对象过滤；不传 → 全站最新流（首页气泡 / 点评圈共用）
-    const scoped = subjectId !== null && subjectId !== undefined
-        && Number.isInteger(Number(subjectId)) && Number(subjectId) > 0;
     const total = await query_one(
         scoped
             ? "SELECT COUNT(*) c FROM review WHERE subject_type = ? AND subject_id = ? AND status IN (0, 2)"
@@ -224,7 +235,7 @@ async function list_reviews(subjectType, subjectId, sort = 'new', page = 1, page
          WHERE ${scoped ? 'r.subject_type = ? AND r.subject_id = ? AND ' : ''}r.status IN (0, 2)
          ORDER BY ${order}
          LIMIT ? OFFSET ?`,
-        [...params, ...(scoped ? [subjectType, subjectId] : []), pageSize, offset]
+        [...params, ...(scoped ? [subjectType, subjectId] : []), ...(dimPath ? [dimPath] : []), pageSize, offset]
     );
     return {
         list: list.map(map_review_row),
@@ -285,7 +296,7 @@ function map_review_row(r) {
  * @returns {Promise<{liked: boolean, likeCount: number}>}
  */
 async function toggle_like(userId, reviewId) {
-    const r = await query_one('SELECT id, like_count FROM review WHERE id = ?', [reviewId]);
+    const r = await query_one('SELECT id, user_id, like_count FROM review WHERE id = ?', [reviewId]);
     if (!r) throw err.not_found('评价不存在');
     // INSERT IGNORE：撞唯一键说明已赞 → 走取消分支
     const ins = await query(
@@ -294,6 +305,14 @@ async function toggle_like(userId, reviewId) {
     );
     if (ins.affectedRows > 0) {
         await query('UPDATE review SET like_count = like_count + 1 WHERE id = ?', [reviewId]);
+        // 新增点赞且非自赞 → 给作者写 like 通知（同类型 24h 内合并展示）
+        if (Number(r.user_id) !== Number(userId)) {
+            const liker = await query_one('SELECT nickname FROM `user` WHERE id = ?', [userId]);
+            await notification.create(
+                r.user_id, 'like', '收到新的点赞',
+                `${liker ? liker.nickname : '有同学'} 赞了你的评价`, 'review', reviewId
+            );
+        }
     } else {
         await query('DELETE FROM review_like WHERE user_id = ? AND review_id = ?', [userId, reviewId]);
         // GREATEST 防御负数（历史数据不一致时不至于出现 -1）

@@ -73,6 +73,36 @@ const config = {
         UPLOAD_PER_H: 30,       // 上传 张/时/人
         AI_PER_H: 20,           // AI 提问 次/时/人
         POINT_SUBMIT_PER_H: 5,  // 点位提交 次/时/人
+        EXPORT_PER_H: 3,        // 个人数据导出 次/时/人
+        COMMENT_PER_H: 30,      // 发表评论 次/时/人
+        TASK_CLAIM_PER_H: 30,   // 任务领取 次/时/人
+        FOLLOW_PER_H: 60,       // 关注/取关 次/时/人
+        // 通知合并窗口：同类型通知在该小时内聚合为一条
+        NOTIFY_MERGE_HOURS: 24,
+        // 口味画像（T-12）：行为样本不足不强行生成；单次最多读取的样本数
+        TASTE_MIN_SAMPLES: 5,
+        TASTE_MAX_SAMPLES: 200,
+        // 草稿箱（T-17）：每用户草稿上限与单份 payload 字节上限
+        DRAFT_MAX: 100,
+        DRAFT_PAYLOAD_MAX_BYTES: 64 * 1024,
+        DRAFT_SUMMARY_LEN: 80,
+        // 关注/粉丝列表单次返回上限（T-14）
+        FOLLOW_LIST_MAX: 200,
+        // 评论列表单次返回上限（T-18）
+        COMMENT_LIST_MAX: 200,
+        COMMENT_MAX_LEN: 300,
+        // 成长任务目标（T-20）：按 action_type 映射，1 打卡/2 点评/3 喂食/4 收藏/5 互动/6 分享
+        GROWTH_TARGETS: { 1: 10, 2: 20, 3: 3, 4: 8, 5: 50, 6: 3 },
+        // 头衔贡献分权重（T-21）：评价/获赞/收藏/打卡/点亮点位
+        CONTRIB_WEIGHTS: { review: 10, like: 2, favorite: 1, checkin: 5, spot: 3 },
+        // 头衔档位（T-21）：min 为进入该档所需贡献分
+        TITLE_TIERS: [
+            { min: 0, name: '美食新客' },
+            { min: 60, name: '校园食探' },
+            { min: 150, name: '风味向导' },
+            { min: 350, name: '食堂老饕' },
+            { min: 700, name: '知食份子' },
+        ],
     },
 };
 

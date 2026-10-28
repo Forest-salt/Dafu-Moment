@@ -218,11 +218,18 @@ function parse_summary(row) {
 
 /**
  * 菜品多维筛选列表
- * @param {Object} f - {canteenId, stationId, q, taste[], taboo[], priceMin, priceMax, ratingMin, sort, page, pageSize}
+ * @param {Object} f - {canteenId, stationId, q, taste[], taboo[], priceMin, priceMax, ratingMin, sort, businessStatus, page, pageSize}
  */
 async function filter_dishes(f) {
     const page = page_int(f.page, 1);
     const pageSize = Math.min(page_int(f.pageSize, 12), 50);
+    // 营业状态：open 仅营业中（status=0）/ closed 仅休息中（status=1）/ all 或缺省为未下架（status<2）
+    const businessStatus = (f.businessStatus === undefined || f.businessStatus === null || f.businessStatus === '')
+        ? 'all' : String(f.businessStatus);
+    if (!['open', 'closed', 'all'].includes(businessStatus)) throw err.invalid('businessStatus 取值不合法');
+    const stationCond = businessStatus === 'open'
+        ? 's.status = 0'
+        : (businessStatus === 'closed' ? 's.status = 1' : 's.status < 2');
     const where = ['d.status = 0'];
     const params = [];
     if (f.stationId) {
@@ -271,7 +278,7 @@ async function filter_dishes(f) {
     }[f.sort || 'comprehensive'] || 'sm.rating_avg DESC, sm.review_count DESC';
 
     const base = `FROM dish d
-        JOIN station s ON s.id = d.station_id AND s.status < 2
+        JOIN station s ON s.id = d.station_id AND ${stationCond}
         JOIN canteen c ON c.id = s.canteen_id
         LEFT JOIN review_summary sm ON sm.subject_type = 0 AND sm.subject_id = d.id
         WHERE ${where.join(' AND ')}`;
@@ -384,11 +391,13 @@ async function search_all(q) {
 }
 
 /**
- * 推荐映射：summary 联查行 → 前端推荐卡片结构
+ * 推荐映射：summary 联查行 → 前端推荐卡片结构（含推荐理由）
  * @param {Object} r - station + review_summary 联查行
- * @returns {Object} {subjectType, subjectId, name, subtitle, cover, avgScore, reviewCount}
+ * @param {string} reasonCode - top_score / pref_category / hot_fallback
+ * @param {string} reason - 用户可读推荐理由
+ * @returns {Object} {subjectType, subjectId, name, subtitle, cover, avgScore, reviewCount, reasonCode, reason}
  */
-function map_recommend_row(r) {
+function map_recommend_row(r, reasonCode, reason) {
     return {
         subjectType: 1,
         subjectId: r.id,
@@ -397,6 +406,8 @@ function map_recommend_row(r) {
         cover: r.cover_object_key,
         avgScore: Number(r.rating_avg),
         reviewCount: Number(r.review_count),
+        reasonCode,
+        reason,
     };
 }
 
@@ -417,7 +428,10 @@ async function recommendations(userId) {
          ORDER BY sm.rating_avg DESC LIMIT 8`,
         [N.MIN_SAMPLES]
     );
-    const top = topRows.map(map_recommend_row);
+    const top = topRows.map((r) => map_recommend_row(
+        r, 'top_score',
+        `${Number(r.review_count)} 条真实评价，均分 ${Number(r.rating_avg)}`
+    ));
 
     // 偏好品类集合：收藏档口直取 category；收藏菜品经 dish→station 取 category
     let forYou;
@@ -445,7 +459,11 @@ async function recommendations(userId) {
              ORDER BY sm.rating_avg DESC LIMIT 8`,
             prefCategories
         );
-        forYou = matched.length >= 3 ? matched.map(map_recommend_row) : null;
+        forYou = matched.length >= 3
+            ? matched.map((r) => map_recommend_row(
+                r, 'pref_category', `你收藏过「${r.category}」类`
+            ))
+            : null;
     } else {
         forYou = null;
     }
@@ -459,7 +477,9 @@ async function recommendations(userId) {
              WHERE s.status < 2 AND sm.review_count > 0
              ORDER BY sm.review_count DESC LIMIT 8`
         );
-        forYou = hotRows.map(map_recommend_row);
+        forYou = hotRows.map((r, index) => map_recommend_row(
+            r, 'hot_fallback', `近期人气第 ${index + 1}`
+        ));
     }
     return { top, forYou };
 }
