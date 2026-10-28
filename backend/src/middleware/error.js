@@ -25,14 +25,23 @@ function not_found() {
  */
 function error_handler() {
     return (errObj, _req, res, _next) => {
-        if(errObj && errObj.code==='LIMIT_FILE_SIZE')return res.status(413).json({code:40001,msg:'图片不能超过5MB'});
+        if (errObj && errObj.code === 'LIMIT_FILE_SIZE') {
+            return res.status(413).json({ code: 40001, msg: '图片不能超过5MB' });
+        }
         const status = errObj.status || (Number(errObj.code) >= 400 ? Number(errObj.code) : null);
+        // 业务异常优先：ApiError 自带业务码（含 50301 服务暂不可用），按自身状态码返回
+        if (errObj instanceof ApiError) {
+            const biz = errObj.biz || BIZ_BY_STATUS[status] || 50001;
+            return res.status(status || 500).json({
+                code: biz,
+                msg: errObj.message || '请求失败',
+                ...(errObj.data ? { data: errObj.data } : {}),
+            });
+        }
         if (status && status < 500) {
-            // ApiError 自带业务码；assert 等普通 Error 按状态码映射（40001 兜底）
-            const biz = errObj instanceof ApiError && errObj.biz
-                ? errObj.biz
-                : (BIZ_BY_STATUS[status] || 40001);
-            return res.status(status).json({ code: biz, msg: errObj.message || '请求失败', ...(errObj instanceof ApiError && errObj.data ? { data: errObj.data } : {}) });
+            // assert 等普通 Error 按状态码映射（40001 兜底）
+            const biz = BIZ_BY_STATUS[status] || 40001;
+            return res.status(status).json({ code: biz, msg: errObj.message || '请求失败' });
         }
         // mysql 重复键 → 409 重复操作（业务码 40402）
         if (errObj && errObj.code === 'ER_DUP_ENTRY') {

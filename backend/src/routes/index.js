@@ -25,6 +25,14 @@ const notification = require('../services/notification.service');
 const push = require('../services/push.service');
 const sticker = require('../services/sticker.service');
 const journal = require('../services/journal.service');
+const privacy = require('../services/privacy.service');
+const tasteSvc = require('../services/taste.service');
+const followSvc = require('../services/follow.service');
+const settingsSvc = require('../services/settings.service');
+const draftSvc = require('../services/draft.service');
+const commentSvc = require('../services/comment.service');
+const taskSvc = require('../services/task.service');
+const titleSvc = require('../services/title.service');
 const adminSvc = require('../services/admin.service');
 const managerSvc = require('../services/manager.service');
 const { minioClient } = require('../db/minio');
@@ -272,7 +280,8 @@ router.get('/points/:id/reviews', auth_optional(), async (req, res, next) => {
     try {
         const subjectId = Number(req.params.id);
         assert(Number.isInteger(subjectId) && subjectId > 0, '点位 ID 不合法');
-        const sort = req.query.sort === 'hot' ? 'hot' : 'new';
+        // sort：hot / new / dim:<dimension_key>（维度适用性由 service 校验）
+        const sort = String(req.query.sort || 'new');
         const page = page_int(req.query.page, 1);
         ok(res, await review.list_reviews(2, subjectId, sort, page, 20, req.user ? req.user.id : null));
     } catch (e) { next(e); }
@@ -284,6 +293,7 @@ router.get('/stations/:id', async (req, res, next) => {
 
 /**
  * 菜品多维筛选（维度排序：comprehensive 综合评分 / new / hot / priceAsc / priceDesc）
+ * businessStatus：open 营业中 / closed 休息中 / all（缺省）未下架
  */
 router.get('/dishes', async (req, res, next) => {
     try {
@@ -294,7 +304,8 @@ router.get('/dishes', async (req, res, next) => {
             taboo: f.taboo ? String(f.taboo).split(',') : [],
             priceMin: f.priceMin, priceMax: f.priceMax,
             ratingMin: f.ratingMin,
-            sort: f.sort, page: f.page, pageSize: f.pageSize,
+            sort: f.sort, businessStatus: f.businessStatus,
+            page: f.page, pageSize: f.pageSize,
         }));
     } catch (e) { next(e); }
 });
@@ -365,7 +376,8 @@ router.get('/reviews', auth_optional(), async (req, res, next) => {
             subjectId = Number(req.query.subjectId);
             assert(Number.isInteger(subjectType) && Number.isInteger(subjectId), 'subject 参数不合法');
         }
-        const sort = req.query.sort === 'hot' ? 'hot' : 'new';
+        // sort：hot / new / dim:<dimension_key>（维度适用性由 service 校验）
+        const sort = String(req.query.sort || 'new');
         const page = page_int(req.query.page, 1);
         // size 1-50（post 详情页历史口径用 50）
         const size = Math.min(Math.max(page_int(req.query.size, 20), 1), 50);
@@ -603,12 +615,21 @@ router.get('/users/:id/profile', auth_optional(), async (req, res, next) => {
             [uid]
         );
         if (!u) throw err.not_found('用户不存在');
-        const reviews = await review.list_user_reviews(uid, req.user ? req.user.id : null, page_int(req.query.page, 1), 10);
+        const viewerId = req.user ? req.user.id : null;
+        const reviews = await review.list_user_reviews(uid, viewerId, page_int(req.query.page, 1), 10);
+        // T-21 头衔进度 + T-14 关注关系（表未落库时返回降级结构，不阻断主页）
+        const [statBlock, relation] = await Promise.all([
+            titleSvc.public_summary(uid),
+            followSvc.counts(uid, viewerId),
+        ]);
         ok(res, {
             user: {
                 id: u.id, nickname: u.nickname, avatar: u.avatar,
                 avatarObjectKey: u.avatar_object_key || null, createdAt: u.created_at,
             },
+            stats: statBlock.stats,
+            title: statBlock.title,
+            follow: relation,
             reviews,
         });
     } catch (e) { next(e); }
@@ -622,6 +643,221 @@ router.get('/me/reviews', auth_required(), async (req, res, next) => {
 });
 router.get('/me/favorites', auth_required(), async (req, res, next) => {
     try { ok(res, await userData.my_favorites(req.user.id)); } catch (e) { next(e); }
+});
+
+/**
+ * 个人数据导出（T-16）：scope=all 或逗号分隔 journal,checkin,taste,ai,favorite,notification
+ * 返回完整 JSON（不含密码 / AI 密钥）
+ */
+router.get('/me/export', auth_required(), rate_limit('export', N.EXPORT_PER_H, 3600), async (req, res, next) => {
+    try { ok(res, await privacy.export_data(req.user.id, req.query.scope)); } catch (e) { next(e); }
+});
+
+/**
+ * 删除个人数据（T-16）：{scopes:[...], confirm:true}，单事务按范围真删除
+ */
+router.delete('/me/data', write_required(), async (req, res, next) => {
+    try { ok(res, await privacy.delete_data(req.user.id, req.body || {})); } catch (e) { next(e); }
+});
+
+/* ---------------- 口味画像（T-12） ---------------- */
+
+/**
+ * 我的口味画像：由已发布评价 / 收藏 / 打卡行为实时聚合五维
+ * 数据不足（< TASTE_MIN_SAMPLES）返回提示；未授权行为分析返回 authorized=false
+ */
+router.get('/me/taste-profile', auth_required(), async (req, res, next) => {
+    try { ok(res, await tasteSvc.get_profile(req.user.id)); } catch (e) { next(e); }
+});
+
+/**
+ * 重新生成画像（可选保存饭 MBTI 编码 mbtiCode）；画像表未落库时只返回计算结果
+ */
+router.post('/me/taste-profile/refresh', write_required(), async (req, res, next) => {
+    try { ok(res, await tasteSvc.refresh_profile(req.user.id, req.body || {})); } catch (e) { next(e); }
+});
+
+/**
+ * 删除画像（软删除；支持画像授权撤回后的清除）
+ */
+router.delete('/me/taste-profile', write_required(), async (req, res, next) => {
+    try { ok(res, await tasteSvc.delete_profile(req.user.id)); } catch (e) { next(e); }
+});
+
+/* ---------------- 关注关系（T-14） ---------------- */
+
+/**
+ * 我的关注 / 粉丝列表（含互关标记与计数；关系表未落库时 available=false）
+ */
+router.get('/me/follows', auth_required(), async (req, res, next) => {
+    try { ok(res, await followSvc.list_mine(req.user.id)); } catch (e) { next(e); }
+});
+
+/**
+ * 关注状态（他人主页按钮初始态）
+ */
+router.get('/users/:id/follow-status', auth_required(), async (req, res, next) => {
+    try { ok(res, await followSvc.follow_status(req.user.id, Number(req.params.id))); } catch (e) { next(e); }
+});
+
+/**
+ * 关注某人（幂等；不能关注自己）
+ */
+router.post('/users/:id/follow', write_required(), rate_limit('follow', N.FOLLOW_PER_H, 3600), async (req, res, next) => {
+    try { ok(res, await followSvc.follow(req.user.id, Number(req.params.id))); } catch (e) { next(e); }
+});
+
+/**
+ * 取关（未关注 404；软删除保留关系行）
+ */
+router.delete('/users/:id/follow', write_required(), rate_limit('follow', N.FOLLOW_PER_H, 3600), async (req, res, next) => {
+    try { ok(res, await followSvc.unfollow(req.user.id, Number(req.params.id))); } catch (e) { next(e); }
+});
+
+/* ---------------- 隐私设置（T-15） ---------------- */
+
+/**
+ * 读取隐私/通知授权开关（表未落库返回缺省值）
+ */
+router.get('/me/privacy', auth_required(), async (req, res, next) => {
+    try { ok(res, await settingsSvc.get_privacy(req.user.id)); } catch (e) { next(e); }
+});
+
+/**
+ * 更新隐私/通知授权开关（布尔或 0/1；单项撤回不影响其他项）
+ */
+router.put('/me/privacy', write_required(), async (req, res, next) => {
+    try { ok(res, await settingsSvc.update_privacy(req.user.id, req.body || {})); } catch (e) { next(e); }
+});
+
+/* ---------------- 草稿箱（T-17） ---------------- */
+
+/**
+ * 我的草稿列表（最近更新在前；每用户上限 DRAFT_MAX）
+ */
+router.get('/me/drafts', auth_required(), async (req, res, next) => {
+    try { ok(res, await draftSvc.list(req.user.id)); } catch (e) { next(e); }
+});
+
+/**
+ * 草稿详情（归属校验，供编辑器回填）
+ */
+router.get('/me/drafts/:id', auth_required(), async (req, res, next) => {
+    try { ok(res, await draftSvc.get(req.user.id, Number(req.params.id))); } catch (e) { next(e); }
+});
+
+/**
+ * 新建草稿：{draftType 1点评/2动态/3长帖/4手账转帖, payload}
+ */
+router.post('/me/drafts', write_required(), async (req, res, next) => {
+    try { ok(res, await draftSvc.create(req.user.id, req.body || {})); } catch (e) { next(e); }
+});
+
+/**
+ * 更新草稿（draftType / payload 可选）
+ */
+router.put('/me/drafts/:id', write_required(), async (req, res, next) => {
+    try { ok(res, await draftSvc.update(req.user.id, Number(req.params.id), req.body || {})); } catch (e) { next(e); }
+});
+
+/**
+ * 删除草稿（软删除）
+ */
+router.delete('/me/drafts/:id', write_required(), async (req, res, next) => {
+    try { ok(res, await draftSvc.remove(req.user.id, Number(req.params.id))); } catch (e) { next(e); }
+});
+
+/* ---------------- 社区评论（T-18） ---------------- */
+
+/**
+ * 评价评论列表（单层；评论表未落库时 available=false）
+ */
+router.get('/reviews/:id/comments', auth_optional(), async (req, res, next) => {
+    try {
+        ok(res, await commentSvc.list_comments(
+            commentSvc.PARENT_REVIEW, Number(req.params.id), req.user ? req.user.id : null
+        ));
+    } catch (e) { next(e); }
+});
+
+/**
+ * 发表评价评论：{content, replyToCommentId?}（机审掩码 + 被评论人通知）
+ */
+router.post('/reviews/:id/comments', write_required(), rate_limit('comment', N.COMMENT_PER_H, 3600), async (req, res, next) => {
+    try {
+        ok(res, await commentSvc.create_comment(
+            req.user.id, commentSvc.PARENT_REVIEW, Number(req.params.id), req.body || {}
+        ));
+    } catch (e) { next(e); }
+});
+
+/**
+ * 帖子评论列表（社区帖子表未落库时 available=false）
+ */
+router.get('/posts/:id/comments', auth_optional(), async (req, res, next) => {
+    try {
+        ok(res, await commentSvc.list_comments(
+            commentSvc.PARENT_POST, Number(req.params.id), req.user ? req.user.id : null
+        ));
+    } catch (e) { next(e); }
+});
+
+/**
+ * 发表帖子评论：{content, replyToCommentId?}
+ */
+router.post('/posts/:id/comments', write_required(), rate_limit('comment', N.COMMENT_PER_H, 3600), async (req, res, next) => {
+    try {
+        ok(res, await commentSvc.create_comment(
+            req.user.id, commentSvc.PARENT_POST, Number(req.params.id), req.body || {}
+        ));
+    } catch (e) { next(e); }
+});
+
+/**
+ * 删除自己的评论（软删除）
+ */
+router.delete('/comments/:id', write_required(), async (req, res, next) => {
+    try { ok(res, await commentSvc.delete_comment(req.user.id, Number(req.params.id))); } catch (e) { next(e); }
+});
+
+/* ---------------- 成长任务（T-20） ---------------- */
+
+/**
+ * 我的任务列表：每日任务 + 成长任务（含今日/累计进度与领取状态）
+ */
+router.get('/me/tasks', auth_required(), async (req, res, next) => {
+    try { ok(res, await taskSvc.list_tasks(req.user.id)); } catch (e) { next(e); }
+});
+
+/**
+ * 领取任务奖励（单事务写 task_claim + coin_transaction；重复领取 409）
+ */
+router.post('/tasks/:id/claim', write_required(), rate_limit('task-claim', N.TASK_CLAIM_PER_H, 3600), async (req, res, next) => {
+    try {
+        const taskId = Number(req.params.id);
+        assert(Number.isInteger(taskId) && taskId > 0, '任务 ID 不合法');
+        ok(res, await taskSvc.claim_task(req.user.id, taskId));
+    } catch (e) { next(e); }
+});
+
+/* ---------------- 头衔与贡献（T-21） ---------------- */
+
+/**
+ * 我的个人统计与头衔进度（评价/获赞/收藏/打卡/点位数 → 贡献分）
+ */
+router.get('/me/stats', auth_required(), async (req, res, next) => {
+    try { ok(res, await titleSvc.stats_for(req.user.id)); } catch (e) { next(e); }
+});
+
+/**
+ * 他人统计与头衔进度（公开主页进度条）
+ */
+router.get('/users/:id/stats', auth_optional(), async (req, res, next) => {
+    try {
+        const uid = Number(req.params.id);
+        assert(Number.isInteger(uid) && uid > 0, '用户 ID 不合法');
+        ok(res, await titleSvc.public_summary(uid));
+    } catch (e) { next(e); }
 });
 
 /**
