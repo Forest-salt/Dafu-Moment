@@ -1,236 +1,132 @@
-/**
- * 打卡服务（15-差距文档 T-01；03 §5.9；AC10/AC11/AC12）
- * 幂等口径：直接 INSERT 撞 uk_check_in_dup，捕获 ER_DUP_ENTRY 后回查既有记录 id，
- *   再抛 409 + data.checkinId（不先查后插，防并发双写）。
- * 删除为物理删：唯一键按 (user_id, canteen_id, check_in_date) 占位，软删会挡住当天再打卡。
- * 日期口径：check_in_date 由应用层按 +08:00 生成 YYYY-MM-DD 字符串写入，不依赖 MySQL
- *   服务器时区；读出统一 DATE_FORMAT(..., '%Y-%m-%d')——连接池 dateStrings:false 会把
- *   DATE 列转成 JS Date，res.json 序列化后偏一天，必须显式格式化。
- * 响应字段用 camelCase（checkinId/checkinDate/dishIds）：与 15-差距文档验收示例一致，
- *   属 §2.5 响应 snake 规则的登记例外（点赞接口 {liked, likeCount} 同款既有先例）。
- */
-const config = require('../config');
-const { query, query_one, get_conn } = require('../db/pool');
+/** 打卡按数据库3.0写入主表和明细表；唯一键承担幂等，错误不回退到localStorage。 */
+const { get_conn, query, query_one } = require('../db/pool');
 const { err } = require('../utils/api-error');
+const {posts_for_journal}=require('./cascade3');
 
-/**
- * 今日日期串（+08:00，YYYY-MM-DD）
- * @returns {string}
- */
-function today_str() {
-    return new Date(Date.now() + 8 * 3600 * 1000).toISOString().slice(0, 10);
+function date_key(value) {
+    const s = String(value || new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Shanghai' }));
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(s) || Number.isNaN(Date.parse(s))) throw err.invalid('就餐日期格式应为YYYY-MM-DD');
+    const d = new Date(`${s}T00:00:00Z`);
+    if (d.toISOString().slice(0, 10) !== s) throw err.invalid('就餐日期无效');
+    return s;
 }
 
-/**
- * 防御解析 JSON 数组列（mysql2 有时返字符串、有时返已解析数组）
- * @param {*} v - JSON 列原值
- * @returns {Array} 非数组一律归一为 []
- */
-function parse_arr(v) {
-    if (Array.isArray(v)) return v;
-    if (typeof v === 'string') {
-        try {
-            const a = JSON.parse(v);
-            return Array.isArray(a) ? a : [];
-        } catch {
-            return [];
-        }
-    }
-    return [];
-}
-
-/**
- * 打卡行转响应对象（camelCase 字段，日期已为 YYYY-MM-DD 字符串）
- * @param {Object} r - 查询行
- * @returns {Object}
- */
-function to_resp(r) {
-    return {
-        id: r.id,
-        canteenId: r.canteen_id,
-        canteenName: r.canteen_name || undefined,
-        checkinDate: r.check_in_date,
-        visibility: r.visibility,
-        note: r.note,
-        photos: parse_arr(r.photos),
-        dishIds: parse_arr(r.dish_ids).map(Number),
-        createdAt: r.created_at,
-    };
-}
-
-/**
- * 提交打卡（一人一点位一天一条，唯一键兜底幂等）
- * @param {number} uid - 用户 id
- * @param {Object} input - {canteen_id, visibility, note, photos, dish_ids}
- * @returns {Promise<{checkinId:number, checkinDate:string}>}
- * @throws 404 点位不存在 / 409+data.checkinId 当天已在该点位打卡
- */
-async function create_checkin(uid, input) {
-    const canteen = await query_one('SELECT id FROM canteen WHERE id = ?', [input.canteen_id]);
-    if (!canteen) throw err.not_found('点位不存在');
-    const today = today_str();
-    try {
-        const r = await query(
-            'INSERT INTO check_in (user_id, canteen_id, check_in_date, visibility, note, photos, dish_ids) VALUES (?, ?, ?, ?, ?, ?, ?)',
-            [uid, input.canteen_id, today, input.visibility, input.note,
-             JSON.stringify(input.photos), JSON.stringify(input.dish_ids)]
-        );
-        return { checkinId: r.insertId, checkinDate: today };
-    } catch (e) {
-        if (e && e.code === 'ER_DUP_ENTRY') {
-            // 撞唯一键：回查既有记录 id 一并返回，前端据此引导「另记一条」
-            const existing = await query_one(
-                'SELECT id FROM check_in WHERE user_id = ? AND canteen_id = ? AND check_in_date = ?',
-                [uid, input.canteen_id, today]
-            );
-            throw err.conflict('今天已在该点位打过卡，可选择「另记一条」', existing ? { checkinId: existing.id } : undefined);
-        }
-        throw e;
-    }
-}
-
-/**
- * 另记一条：往当天既有打卡追加菜品/图片，note 非空则覆盖（不新建记录）
- * 读-改-写走事务 + FOR UPDATE 行锁，防同用户并发追加互相覆盖
- * @param {number} uid - 用户 id
- * @param {Object} input - {canteen_id, dish_ids, photos, note}
- * @returns {Promise<{checkinId:number, dishIds:number[]}>}
- * @throws 404 当天无打卡记录 / 422 合并后图片超上限
- */
-async function append_checkin(uid, input) {
+async function create(user_id, input) {
+    let location_id = Number(input.locationId || input.canteenId);
+    const day = date_key(input.checkInDate || input.date);
+    if (input.dishIds !== undefined && !Array.isArray(input.dishIds)) throw err.invalid('菜品列表应为数组');
     const conn = await get_conn();
     try {
         await conn.beginTransaction();
-        const [rows] = await conn.query(
-            'SELECT id, dish_ids, photos, note FROM check_in WHERE user_id = ? AND canteen_id = ? AND check_in_date = ? FOR UPDATE',
-            [uid, input.canteen_id, today_str()]
-        );
-        if (!rows.length) throw err.not_found('今天还没有在该点位打卡，请先打卡');
-        const row = rows[0];
-        const dish_ids = [...new Set([...parse_arr(row.dish_ids).map(Number), ...input.dish_ids])];
-        const photos = [...parse_arr(row.photos), ...input.photos];
-        if (photos.length > config.numbers.CHECKIN_PHOTOS_MAX) {
-            throw err.invalid(`图片最多 ${config.numbers.CHECKIN_PHOTOS_MAX} 张`);
+        await conn.query('SELECT id FROM user WHERE id=? FOR UPDATE',[user_id]);
+        if (input.stationId) {
+            const [rows] = await conn.query('SELECT location_id FROM station WHERE id=? AND deleted_at IS NULL AND status=1', [Number(input.stationId)]);
+            if (!rows.length) throw err.not_found('档口不存在');
+            if (location_id && location_id !== Number(rows[0].location_id)) throw err.invalid('档口与点位不匹配');
+            location_id = Number(rows[0].location_id);
         }
-        const note = input.note || row.note;
-        await conn.query('UPDATE check_in SET dish_ids = ?, photos = ?, note = ? WHERE id = ?',
-            [JSON.stringify(dish_ids), JSON.stringify(photos), note, row.id]);
+        if (!Number.isSafeInteger(location_id) || location_id <= 0) throw err.invalid('请指定点位或档口');
+        const [locations] = await conn.query('SELECT id FROM location WHERE id=? AND deleted_at IS NULL', [location_id]);
+        if (!locations.length) throw err.not_found('点位不存在');
+        const visibility = input.visibility === undefined ? 1 : Number(input.visibility);
+        if (![1, 2, 3].includes(visibility)) throw err.invalid('visibility按3.0取1仅记录、2私有、3公开');
+        const note = String(input.note || '');
+        if ([...note].length > 255) throw err.invalid('随笔不能超过255字');
+        const [r] = await conn.query('INSERT INTO check_in(user_id,location_id,check_in_date,visibility,note) VALUES(?,?,?,?,?)', [user_id, location_id, day, visibility, note || null]);
+        const id = r.insertId;
+        const dishes = [...new Set((input.dishIds || []).map(Number))];
+        for (const dish_id of dishes) {
+            const [found] = await conn.query('SELECT d.id FROM dish d JOIN station s ON s.id=d.station_id WHERE d.id=? AND s.location_id=? AND d.deleted_at IS NULL AND d.status=1 AND s.deleted_at IS NULL AND s.status=1', [dish_id, location_id]);
+            if (!found.length) throw err.invalid('菜品不属于该点位或不可用');
+            await conn.query('INSERT INTO check_in_dish(check_in_id,dish_id,quantity) VALUES(?,?,1)', [id, dish_id]);
+        }
+        const photos = input.photos || input.imageKeys || [];
+        if (!Array.isArray(photos) || photos.length > 9 || new Set(photos).size!==photos.length || photos.some(k=>typeof k!=='string')) throw err.invalid('照片列表应为最多9个不重复对象键');
+        for (let i = 0; i < photos.length; i++) {
+            const key = String(photos[i]);
+            if (!key || key.length > 255 || /^https?:/i.test(key)) throw err.invalid('照片应使用已上传的MinIO对象键');
+            const [assets] = await conn.query('SELECT id FROM upload_asset WHERE object_key=? AND uploader_id=? FOR UPDATE', [key, user_id]);
+            if (!assets.length) throw err.forbidden('照片不属于当前用户或未登记上传');
+            await conn.query('INSERT INTO check_in_image(check_in_id,object_key,sort) VALUES(?,?,?)', [id, key, i]);
+            await conn.query('UPDATE upload_asset SET ref_count=ref_count+1 WHERE id=?', [assets[0].id]);
+        }
+        await conn.query('INSERT INTO footprint(user_id,location_id,first_visit_at) VALUES(?,?,NOW()) ON DUPLICATE KEY UPDATE location_id=VALUES(location_id)', [user_id, location_id]);
+        await refresh_achievements(conn, user_id);
         await conn.commit();
-        return { checkinId: row.id, dishIds: dish_ids };
+        return { checkinId: id, locationId: location_id, checkInDate: day };
     } catch (e) {
         await conn.rollback();
+        if (e.code === 'ER_DUP_ENTRY') {
+            const old = await query_one('SELECT id FROM check_in WHERE user_id=? AND location_id=? AND check_in_date=?', [user_id, location_id, day]);
+            const conflict = err.conflict('同一用户在该点位当日已有打卡');
+            conflict.data = { checkinId: old ? old.id : null };
+            throw conflict;
+        }
         throw e;
-    } finally {
-        conn.release();
+    } finally { conn.release(); }
+}
+
+async function refresh_achievements(conn, user_id) {
+    // Progress follows actual normalized rows; reward issuance remains a separate business operation.
+    const [rows] = await conn.query(`SELECT
+      (SELECT COUNT(*) FROM check_in WHERE user_id=? AND deleted_at IS NULL) checkins,
+      (SELECT COUNT(DISTINCT location_id) FROM check_in WHERE user_id=? AND deleted_at IS NULL) places,
+      (SELECT COUNT(*) FROM review WHERE user_id=? AND status=0 AND deleted_at IS NULL) reviews,
+      (SELECT COUNT(*) FROM review_like l JOIN review r ON l.biz_type=1 AND l.biz_id=r.id WHERE r.user_id=? AND l.deleted_at IS NULL AND r.status=0 AND r.deleted_at IS NULL) likes`, [user_id,user_id,user_id,user_id]);
+    const p = rows[0];
+    const [defs] = await conn.query('SELECT id,metric_type,target_value FROM achievement');
+    for (const d of defs) {
+        const value = Number([0,p.checkins,p.places,p.reviews,p.likes][Number(d.metric_type)] || 0);
+        await conn.query('INSERT INTO user_achievement(user_id,achievement_id,progress,unlocked) VALUES(?,?,?,?) ON DUPLICATE KEY UPDATE progress=VALUES(progress),unlocked=VALUES(unlocked)', [user_id,d.id,value,Number(value >= d.target_value)]);
     }
 }
 
-/**
- * 我的打卡记录（分页四键，canteen_id 可选筛选，时间倒序）
- * @param {number} uid - 用户 id
- * @param {Object} opt - {canteen_id:number|null, page:number, size:number}
- * @returns {Promise<{list:Array, total:number, page:number, size:number}>}
- */
-async function list_checkins(uid, opt) {
-    const where = ['ci.user_id = ?'];
-    const params = [uid];
-    if (opt.canteen_id !== null) {
-        where.push('ci.canteen_id = ?');
-        params.push(opt.canteen_id);
-    }
-    const w = where.join(' AND ');
-    const total_row = await query_one(`SELECT COUNT(*) AS n FROM check_in ci WHERE ${w}`, params);
-    const rows = await query(
-        `SELECT ci.id, ci.canteen_id, c.name AS canteen_name,
-                DATE_FORMAT(ci.check_in_date, '%Y-%m-%d') AS check_in_date,
-                ci.visibility, ci.note, ci.photos, ci.dish_ids, ci.created_at
-         FROM check_in ci JOIN canteen c ON c.id = ci.canteen_id
-         WHERE ${w}
-         ORDER BY ci.check_in_date DESC, ci.id DESC
-         LIMIT ? OFFSET ?`,
-        [...params, opt.size, (opt.page - 1) * opt.size]
-    );
-    return { list: rows.map(to_resp), total: total_row ? Number(total_row.n) : 0, page: opt.page, size: opt.size };
+async function list(user_id) {
+    return query(`SELECT c.id,c.location_id,c.check_in_date,c.visibility,c.note,c.created_at,l.name location_name
+       FROM check_in c JOIN location l ON l.id=c.location_id
+       WHERE c.user_id=? AND c.deleted_at IS NULL ORDER BY c.check_in_date DESC,c.id DESC`, [user_id]);
 }
-
-/**
- * 打卡日历（03 §5.9 日历聚合）：按月分组，一天可有多点位多条
- * @param {number} uid - 用户 id
- * @param {string} month - YYYY-MM
- * @returns {Promise<{days:Array<{checkinDate:string, count:number, visibility:number, dishIds:number[]}>}>} 该月无数据返空数组
- */
-async function checkin_calendar(uid, month) {
-    const rows = await query(
-        `SELECT DATE_FORMAT(check_in_date, '%Y-%m-%d') AS check_in_date, visibility, dish_ids
-         FROM check_in
-         WHERE user_id = ? AND DATE_FORMAT(check_in_date, '%Y-%m') = ?
-         ORDER BY check_in_date, id`,
-        [uid, month]
-    );
-    const by_day = new Map();
-    for (const r of rows) {
-        const day = by_day.get(r.check_in_date) || { checkinDate: r.check_in_date, count: 0, visibility: r.visibility, dishIds: [] };
-        day.count += 1;
-        day.visibility = Math.min(day.visibility, r.visibility); // 当日多条取最公开的一档
-        day.dishIds = [...new Set([...day.dishIds, ...parse_arr(r.dish_ids).map(Number)])];
-        by_day.set(r.check_in_date, day);
-    }
-    return { days: [...by_day.values()] };
+async function calendar(user_id, month) {
+    if (month && !/^\d{4}-(0[1-9]|1[0-2])$/.test(month)) throw err.invalid('月份格式应为YYYY-MM');
+    return query(`SELECT DATE_FORMAT(check_in_date,'%Y-%m-%d') date,COUNT(*) count FROM check_in
+      WHERE user_id=? AND deleted_at IS NULL ${month ? "AND DATE_FORMAT(check_in_date,'%Y-%m')=?" : ''}
+      GROUP BY check_in_date ORDER BY check_in_date`, month ? [user_id,month] : [user_id]);
 }
-
-/**
- * 打卡统计（AC12）：四项均为数字，无记录返回全 0
- * @param {number} uid - 用户 id
- * @returns {Promise<{totalDays:number, monthDays:number, continuousDays:number, monthCanteens:number}>}
- */
-async function checkin_stats(uid) {
-    const today = today_str();
-    const month = today.slice(0, 7);
-    const rows = await query(
-        `SELECT DISTINCT DATE_FORMAT(check_in_date, '%Y-%m-%d') AS d
-         FROM check_in WHERE user_id = ? ORDER BY d DESC`,
-        [uid]
-    );
-    const days = rows.map((r) => r.d);
-    // 连续天数：从今天起逐日回推；今天没打则从昨天起算（昨天的连续不白丢）
-    let continuous = 0;
-    let expect = today;
-    if (days.length && days[0] !== today) {
-        const yesterday = new Date(Date.now() + 8 * 3600 * 1000 - 24 * 3600 * 1000).toISOString().slice(0, 10);
-        expect = days[0] === yesterday ? yesterday : '';
+async function stats(user_id) {
+    const r = await query_one('SELECT COUNT(*) total,COUNT(DISTINCT location_id) places FROM check_in WHERE user_id=? AND deleted_at IS NULL', [user_id]);
+    const days = await query('SELECT DISTINCT DATE_FORMAT(check_in_date,\'%Y-%m-%d\') day FROM check_in WHERE user_id=? AND deleted_at IS NULL ORDER BY day DESC', [user_id]);
+    const today = date_key();
+    const yesterday = new Date(Date.parse(today+'T00:00:00Z')-86400000).toISOString().slice(0,10);
+    let streak = 0;
+    if (days.length && [today,yesterday].includes(days[0].day)) {
+        let previous = Date.parse(days[0].day+'T00:00:00Z');
+        for (const d of days) { const current = Date.parse(d.day+'T00:00:00Z'); if (current !== previous) break; streak++; previous -= 86400000; }
     }
-    for (const d of days) {
-        if (d !== expect) break;
-        continuous += 1;
-        expect = new Date(`${expect}T00:00:00+08:00`);
-        expect = new Date(expect.getTime() - 24 * 3600 * 1000).toISOString().slice(0, 10);
-    }
-    const canteen_row = await query_one(
-        `SELECT COUNT(DISTINCT canteen_id) AS n FROM check_in
-         WHERE user_id = ? AND DATE_FORMAT(check_in_date, '%Y-%m') = ?`,
-        [uid, month]
-    );
-    return {
-        totalDays: days.length,
-        monthDays: days.filter((d) => d.startsWith(month)).length,
-        continuousDays: continuous,
-        monthCanteens: canteen_row ? Number(canteen_row.n) : 0,
-    };
+    return { total: Number(r.total), places: Number(r.places), streak };
 }
-
-/**
- * 删除打卡（物理删：唯一键按日占位，软删会挡住当天再打卡）
- * @param {number} uid - 当前用户 id
- * @param {number} id - 打卡记录 id
- * @returns {Promise<{deleted:boolean, checkinId:number}>}
- * @throws 404 记录不存在 / 403 非本人记录
- */
-async function delete_checkin(uid, id) {
-    const row = await query_one('SELECT id, user_id FROM check_in WHERE id = ?', [id]);
-    if (!row) throw err.not_found('打卡记录不存在');
-    if (row.user_id !== uid) throw err.forbidden('不能删除他人的打卡记录');
-    await query('DELETE FROM check_in WHERE id = ?', [id]);
-    return { deleted: true, checkinId: id };
+async function remove(user_id, id) {
+    const conn = await get_conn();
+    try {
+        await conn.beginTransaction();
+        await conn.query('SELECT id FROM user WHERE id=? FOR UPDATE',[user_id]);
+        const [rows] = await conn.query('SELECT id,user_id,location_id FROM check_in WHERE id=? AND deleted_at IS NULL FOR UPDATE', [id]);
+        if (!rows.length) throw err.not_found('打卡不存在');
+        if (Number(rows[0].user_id) !== Number(user_id)) throw err.forbidden('不能删除他人的打卡');
+        await conn.query('UPDATE check_in SET deleted_at=NOW() WHERE id=?', [id]);
+        await conn.query(`UPDATE upload_asset a JOIN check_in_image i ON i.object_key=a.object_key
+          SET a.ref_count=GREATEST(0,a.ref_count-1) WHERE i.check_in_id=? AND i.deleted_at IS NULL`, [id]);
+        await conn.query('UPDATE check_in_image SET deleted_at=NOW() WHERE check_in_id=?', [id]);
+        const [journals]=await conn.query('SELECT id FROM journal WHERE check_in_id=? AND deleted_at IS NULL FOR UPDATE',[id]);
+        for(const j of journals)await posts_for_journal(conn,j.id);
+        await conn.query(`UPDATE upload_asset a JOIN journal_image i ON i.object_key=a.object_key JOIN journal j ON j.id=i.journal_id
+          SET a.ref_count=GREATEST(0,a.ref_count-1) WHERE j.check_in_id=? AND i.deleted_at IS NULL AND j.deleted_at IS NULL`, [id]);
+        await conn.query('UPDATE journal_image i JOIN journal j ON j.id=i.journal_id SET i.deleted_at=NOW() WHERE j.check_in_id=? AND i.deleted_at IS NULL', [id]);
+        await conn.query('UPDATE journal SET deleted_at=NOW() WHERE check_in_id=? AND deleted_at IS NULL', [id]);
+        // Footprint is historical first visit in3.0; keep it, and recompute active progress.
+        await refresh_achievements(conn,user_id);
+        await conn.commit();
+    } catch (e) { await conn.rollback(); throw e; }
+    finally { conn.release(); }
+    return { deleted: true };
 }
-
-module.exports = { create_checkin, append_checkin, list_checkins, checkin_calendar, checkin_stats, delete_checkin };
+module.exports = { create,list,calendar,stats,remove,refresh_achievements,date_key };

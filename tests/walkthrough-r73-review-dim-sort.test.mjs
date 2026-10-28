@@ -57,14 +57,16 @@ function assert_dim_desc(list, key) {
 
 console.log('=== r73 评价维度排序走查（T-11 / AC05） ===');
 
-await case_it('IT-01', '全站流 sort=dim:taste → 200 且按 taste 分项分降序', async () => {
-    const d = await get('/api/reviews?sort=dim:taste&page=1&size=20');
-    assert(Array.isArray(d.list) && d.list.length > 0, '评价列表为空（需先跑种子）');
-    assert_dim_desc(d.list, 'taste');
+await case_it('IT-01', '全站流无对象 sort=dim:taste → 422 + 40001（维度排序须指定点评对象）', async () => {
+    const r = await request('GET', '/api/reviews?sort=dim:taste&page=1&size=20');
+    assert(r.status === 422, `应 422，实际 ${r.status}`);
+    assert(r.json.code === 40001, `业务码应 40001，实际 ${r.json.code}`);
 });
 
-await case_it('IT-02', '非法维度 sort=dim:hack → 422 + 40001', async () => {
-    const r = await request('GET', '/api/reviews?sort=dim:hack&page=1&size=20');
+await case_it('IT-02', '非法维度 sort=dim:hack（指定对象）→ 422 + 40001', async () => {
+    const dishes = await get('/api/dishes?page=1&size=1');
+    assert(dishes.list && dishes.list.length > 0, '菜品列表为空（需先跑种子）');
+    const r = await request('GET', `/api/reviews?subjectType=0&subjectId=${dishes.list[0].id}&sort=dim:hack&page=1&size=20`);
     assert(r.status === 422, `应 422，实际 ${r.status}`);
     assert(r.json.code === 40001, `业务码应 40001，实际 ${r.json.code}`);
 });

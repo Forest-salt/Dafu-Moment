@@ -33,7 +33,8 @@ const draftSvc = require('../services/draft.service');
 const commentSvc = require('../services/comment.service');
 const taskSvc = require('../services/task.service');
 const titleSvc = require('../services/title.service');
-const checkin = require('../services/checkin.service');
+// 2.0 主库打卡实现（3.0 的 location/check_in_dish 版本在 checkin.service.js，由 v3 路由使用）
+const checkin = require('../services/checkin-legacy.service');
 const adminSvc = require('../services/admin.service');
 const managerSvc = require('../services/manager.service');
 const { minioClient } = require('../db/minio');
